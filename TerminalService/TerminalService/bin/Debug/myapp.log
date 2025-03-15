@@ -1,0 +1,9 @@
+2025-03-15 12:00:50,465 [4] INFO TerminalService.TerminalService - In Onstart.
+2025-03-15 12:00:55,484 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 1
+2025-03-15 12:01:00,487 [4] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 2
+2025-03-15 12:01:05,502 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 3
+2025-03-15 12:01:10,515 [4] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 4
+2025-03-15 12:01:15,520 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 5
+2025-03-15 12:01:20,522 [4] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 6
+2025-03-15 12:01:25,534 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 7
+2025-03-15 12:01:26,019 [4] INFO TerminalService.TerminalService - In OnStop.

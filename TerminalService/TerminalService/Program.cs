@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Reflection;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
+using log4net;
+using log4net.Config;
 
 namespace TerminalService
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+
         static void Main()
         {
+            // Load log4net config
+            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(logRepository, new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config"));
+
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
