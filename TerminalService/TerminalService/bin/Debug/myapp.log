@@ -1,9 +1,55 @@
-2025-03-15 12:00:50,465 [4] INFO TerminalService.TerminalService - In Onstart.
-2025-03-15 12:00:55,484 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 1
-2025-03-15 12:01:00,487 [4] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 2
-2025-03-15 12:01:05,502 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 3
-2025-03-15 12:01:10,515 [4] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 4
-2025-03-15 12:01:15,520 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 5
-2025-03-15 12:01:20,522 [4] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 6
-2025-03-15 12:01:25,534 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 7
-2025-03-15 12:01:26,019 [4] INFO TerminalService.TerminalService - In OnStop.
+2025-03-15 14:43:30,803 [4] INFO TerminalService.TerminalService - In Onstart.
+2025-03-15 14:43:40,838 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 1
+2025-03-15 14:43:41,013 [5] INFO TerminalService.TerminalService - IP Address: 192.168.1.239
+2025-03-15 14:43:41,013 [5] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-15 14:43:41,042 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-15 14:43:41,043 [5] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-15 14:43:41,043 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-15 14:43:41,043 [5] INFO TerminalService.TerminalService - MAC Address: 02:1A:20:52:41:53
+2025-03-15 14:43:41,050 [5] INFO TerminalService.TerminalService - MAC Address: 16:0F:20:52:41:53
+2025-03-15 14:43:41,050 [5] INFO TerminalService.TerminalService - MAC Address: 24:85:20:52:41:53
+2025-03-15 14:43:41,051 [5] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-15 14:43:41,051 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:0B
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-15 14:43:42,348 [5] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-15 14:43:42,376 [5] INFO TerminalService.TerminalService - TotalPhysicalMemory - RAM: 17054937088
+2025-03-15 14:43:42,393 [5] INFO TerminalService.TerminalService - DiskDrive: TOSHIBA KSG60ZMV256G M.2 2280 256GB
+2025-03-15 14:43:42,393 [5] INFO TerminalService.TerminalService - InterfaceType: SCSI
+2025-03-15 14:43:42,393 [5] INFO TerminalService.TerminalService - SerialNumber:         482B52Y9K5SP
+2025-03-15 14:43:42,393 [5] INFO TerminalService.TerminalService - Size: 256052966400
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - FreeSpace: 11901263872
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-15 14:43:42,407 [5] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-15 14:43:42,408 [5] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-15 14:43:42,408 [5] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-15 14:43:42,408 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-15 14:43:42,408 [5] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-15 14:43:42,408 [5] INFO TerminalService.TerminalService - FreeSpace: 51346845696
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Firewall Profile: {0}Domain
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Enabled: {0}1
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Default Inbound Action: {0}0
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Default Outbound Action: {0}0
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Firewall Profile: {0}Private
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Enabled: {0}1
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Default Inbound Action: {0}0
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Default Outbound Action: {0}0
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Firewall Profile: {0}Public
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Enabled: {0}1
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Default Inbound Action: {0}0
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - Default Outbound Action: {0}0
+2025-03-15 14:43:42,444 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-15 14:43:48,932 [4] INFO TerminalService.TerminalService - In OnStop.
