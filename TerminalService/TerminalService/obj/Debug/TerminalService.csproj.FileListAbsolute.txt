@@ -3,8 +3,12 @@ E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\Term
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.pdb
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\log4net.dll
+E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\MQTTnet.dll
+E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\Newtonsoft.Json.dll
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\log4net.pdb
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\log4net.xml
+E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\MQTTnet.xml
+E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\Newtonsoft.Json.xml
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\obj\Debug\TerminalService.csproj.AssemblyReference.cache
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\obj\Debug\TerminalService.ProjectInstaller.resources
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\obj\Debug\TerminalService.TerminalService.resources

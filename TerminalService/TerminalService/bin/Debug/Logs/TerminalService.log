@@ -1,0 +1,623 @@
+2025-03-23 20:09:00,140 [4] INFO TerminalService.TerminalService - In Onstart.
+2025-03-23 20:09:06,673 [10] INFO TerminalService.TerminalService - Connected to MQTT broker.
+2025-03-23 20:09:07,021 [11] INFO TerminalService.TerminalService - Subscribed to command topic.
+2025-03-23 20:09:26,465 [11] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"KillProcess","Params":"notepad"}
+2025-03-23 20:09:26,510 [11] INFO TerminalService.TerminalService - Killing process: notepad
+2025-03-23 20:10:07,043 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 1
+2025-03-23 20:10:07,418 [5] INFO TerminalService.TerminalService - Hostname: DESKTOP-93MMJ3Q
+2025-03-23 20:10:07,418 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:07,479 [5] INFO TerminalService.TerminalService - IP Address: 192.168.0.114
+2025-03-23 20:10:07,479 [5] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-23 20:10:07,479 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:07,515 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-23 20:10:07,515 [5] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-23 20:10:07,516 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-23 20:10:07,516 [5] INFO TerminalService.TerminalService - MAC Address: 86:51:20:52:41:53
+2025-03-23 20:10:07,516 [5] INFO TerminalService.TerminalService - MAC Address: 98:37:20:52:41:53
+2025-03-23 20:10:07,516 [5] INFO TerminalService.TerminalService - MAC Address: A8:27:20:52:41:53
+2025-03-23 20:10:07,517 [5] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-23 20:10:07,517 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:08,938 [5] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-23 20:10:08,940 [5] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-23 20:10:08,940 [5] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-23 20:10:08,940 [5] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-23 20:10:08,940 [5] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-23 20:10:08,940 [5] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-23 20:10:08,940 [5] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-23 20:10:08,943 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:08,974 [5] INFO TerminalService.TerminalService - RAM: 15GB
+2025-03-23 20:10:08,999 [5] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-23 20:10:08,999 [5] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-23 20:10:08,999 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:10:08,999 [5] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-23 20:10:08,999 [5] INFO TerminalService.TerminalService - FreeSpace: 15835287552
+2025-03-23 20:10:08,999 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:09,000 [5] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-23 20:10:09,000 [5] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-23 20:10:09,000 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:10:09,000 [5] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-23 20:10:09,000 [5] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - FreeSpace: 51722121216
+2025-03-23 20:10:09,001 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:09,083 [5] INFO TerminalService.TerminalService - Firewall Profile: Domain
+2025-03-23 20:10:09,084 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:10:09,084 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:09,085 [5] INFO TerminalService.TerminalService - Firewall Profile: Private
+2025-03-23 20:10:09,085 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:10:09,085 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:09,085 [5] INFO TerminalService.TerminalService - Firewall Profile: Public
+2025-03-23 20:10:09,085 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:10:09,085 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:10:09,135 [7] INFO TerminalService.TerminalService - Published system info to MQTT.
+2025-03-23 20:10:40,351 [7] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"killprocess","Params":"powerpoint"}
+2025-03-23 20:10:40,351 [7] WARN TerminalService.TerminalService - Unknown command: killprocess
+2025-03-23 20:11:07,040 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 2
+2025-03-23 20:11:07,089 [5] INFO TerminalService.TerminalService - Hostname: DESKTOP-93MMJ3Q
+2025-03-23 20:11:07,089 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:07,157 [5] INFO TerminalService.TerminalService - IP Address: 192.168.0.114
+2025-03-23 20:11:07,157 [5] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-23 20:11:07,157 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: 86:51:20:52:41:53
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: 98:37:20:52:41:53
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: A8:27:20:52:41:53
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-23 20:11:07,204 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-23 20:11:08,272 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,309 [5] INFO TerminalService.TerminalService - RAM: 15GB
+2025-03-23 20:11:08,340 [5] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-23 20:11:08,341 [5] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-23 20:11:08,341 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:11:08,341 [5] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-23 20:11:08,341 [5] INFO TerminalService.TerminalService - FreeSpace: 15831408640
+2025-03-23 20:11:08,341 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,343 [5] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-23 20:11:08,345 [5] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-23 20:11:08,345 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:11:08,346 [5] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-23 20:11:08,346 [5] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-23 20:11:08,346 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,349 [5] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-23 20:11:08,349 [5] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-23 20:11:08,349 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:11:08,349 [5] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-23 20:11:08,349 [5] INFO TerminalService.TerminalService - FreeSpace: 51722108928
+2025-03-23 20:11:08,349 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - Firewall Profile: Domain
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - Firewall Profile: Private
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - Firewall Profile: Public
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:11:08,408 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:11:08,408 [16] INFO TerminalService.TerminalService - Published system info to MQTT.
+2025-03-23 20:11:20,064 [11] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"KillProcess","Params":"powerpoint"}
+2025-03-23 20:11:20,064 [11] INFO TerminalService.TerminalService - Killing process: powerpoint
+2025-03-23 20:11:21,820 [4] ERROR TerminalService.TerminalService - PowerShell Error: Stop-Process : Cannot find a process with the name "powerpoint". Verify the process name and call the cmdlet again.
+At line:1 char:1
++ Stop-Process -Name powerpoint -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (powerpoint:String) [Stop-Process], ProcessCommandException
+    + FullyQualifiedErrorId : NoProcessFoundForGivenName,Microsoft.PowerShell.Commands.StopProcessCommand
+ 
+
+2025-03-23 20:12:07,050 [11] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 3
+2025-03-23 20:12:07,063 [11] INFO TerminalService.TerminalService - Hostname: DESKTOP-93MMJ3Q
+2025-03-23 20:12:07,063 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:07,092 [11] INFO TerminalService.TerminalService - IP Address: 192.168.0.114
+2025-03-23 20:12:07,092 [11] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-23 20:12:07,092 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:07,121 [11] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-23 20:12:07,121 [11] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-23 20:12:07,121 [11] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-23 20:12:07,121 [11] INFO TerminalService.TerminalService - MAC Address: 86:51:20:52:41:53
+2025-03-23 20:12:07,123 [11] INFO TerminalService.TerminalService - MAC Address: 98:37:20:52:41:53
+2025-03-23 20:12:07,123 [11] INFO TerminalService.TerminalService - MAC Address: A8:27:20:52:41:53
+2025-03-23 20:12:07,123 [11] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-23 20:12:07,123 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,178 [11] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-23 20:12:08,186 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,205 [11] INFO TerminalService.TerminalService - RAM: 15GB
+2025-03-23 20:12:08,220 [11] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-23 20:12:08,220 [11] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-23 20:12:08,220 [11] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:12:08,220 [11] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-23 20:12:08,220 [11] INFO TerminalService.TerminalService - FreeSpace: 15829016576
+2025-03-23 20:12:08,220 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,221 [11] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-23 20:12:08,221 [11] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-23 20:12:08,221 [11] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:12:08,221 [11] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-23 20:12:08,221 [11] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-23 20:12:08,221 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,223 [11] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-23 20:12:08,223 [11] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-23 20:12:08,223 [11] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:12:08,223 [11] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-23 20:12:08,223 [11] INFO TerminalService.TerminalService - FreeSpace: 51722108928
+2025-03-23 20:12:08,223 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,271 [11] INFO TerminalService.TerminalService - Firewall Profile: Domain
+2025-03-23 20:12:08,271 [11] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:12:08,271 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,272 [11] INFO TerminalService.TerminalService - Firewall Profile: Private
+2025-03-23 20:12:08,272 [11] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:12:08,272 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,273 [11] INFO TerminalService.TerminalService - Firewall Profile: Public
+2025-03-23 20:12:08,273 [11] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:12:08,273 [11] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:12:08,274 [17] INFO TerminalService.TerminalService - Published system info to MQTT.
+2025-03-23 20:12:51,262 [11] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"GetProcesses","Params":""}
+2025-03-23 20:12:51,262 [11] INFO TerminalService.TerminalService - Retrieving process list...
+2025-03-23 20:12:53,315 [4] INFO TerminalService.TerminalService - PowerShell Output: 
+Name                                    Id
+----                                    --
+AggregatorHost                        7372
+ai                                   15308
+ApMsgFwd                             13588
+ApntEx                                5560
+Apoint                                6760
+ApplicationFrameHost                 10844
+ApRemote                              5992
+cmd                                  11400
+cmd                                  13636
+CNAB4RPD                              7948
+CompPkgSrv                           19904
+conhost                               2936
+conhost                               4744
+conhost                               8960
+conhost                              16516
+conhost                              16580
+conhost                              16912
+conhost                              17796
+conhost                              23520
+csrss                                  660
+csrss                                20384
+ctfmon                                1260
+dasHost                               2700
+devenv                                2820
+devenv                                7044
+dllhost                               6932
+dllhost                              17056
+dllhost                              17692
+dwm                                   1756
+esif_uf                               5040
+EVKey64                               5060
+explorer                             20192
+FileCoAuth                            1304
+fontdrvhost                           1012
+fontdrvhost                          19040
+HelloService                          4956
+hidfind                              11552
+HidMonitorSvc                         4872
+Idle                                     0
+igfxCUIService                        2944
+igfxEM                                6956
+IntelCpHDCPSvc                        1620
+IntelCpHeciSvc                        1984
+jhi_service                           5664
+LMS                                   5032
+LocalCenter                           3380
+LockApp                               2216
+LsaIso                                 844
+lsass                                  856
+Memory Compression                    2668
+Microsoft.ServiceHub.Controller       9916
+Microsoft.ServiceHub.Controller      11876
+Microsoft.SharePoint                 17420
+MoUsoCoreWorker                      16552
+MpDefenderCoreService                 5108
+MSBuild                               9180
+msedge                                 992
+msedge                                1108
+msedge                                1860
+msedge                                2440
+msedge                                3400
+msedge                                4132
+msedge                                4576
+msedge                                5224
+msedge                                6068
+msedge                                6276
+msedge                                7156
+msedge                                8524
+msedge                                8632
+msedge                                8972
+msedge                                9188
+msedge                                9628
+msedge                                9752
+msedge                               10852
+msedge                               11760
+msedge                               12040
+msedge                               14232
+msedge                               14508
+msedge                               14776
+msedge                               16080
+msedge                               16472
+msedge                               16612
+msedge                               16640
+msedge                               16720
+msedge                               18236
+msedge                               19020
+msedge                               19996
+msedge                               20028
+msedge                               20104
+msedgewebview2                        3088
+msedgewebview2                        4444
+msedgewebview2                        8672
+msedgewebview2                       10112
+msedgewebview2                       10512
+msedgewebview2                       11644
+msedgewebview2                       11748
+msedgewebview2                       12280
+msedgewebview2                       12700
+msedgewebview2                       14188
+msedgewebview2                       18700
+msedgewebview2                       19168
+msedgewebview2                       21292
+msedgewebview2                       22676
+MsMpEng                               5368
+ms-teams                              1440
+ms-teams                             15768
+NisSrv                                9572
+NVDisplay.Container                   2268
+NVDisplay.Container                  19224
+OfficeClickToRun                      4880
+OneApp.IGCC.WinService                4984
+OneDrive                             10660
+ONENOTEM                              9760
+OpenConsole                          13568
+OpenConsole                          20312
+PerfWatson2                          13596
+PerfWatson2                          15636
+POWERPNT                              9892
+POWERPNT                             18232
+powershell                           14300
+PresentationFontCache                 6312
+RAVBg64                               7616
+RAVBg64                               7880
+RAVBg64                              20144
+Registry                               108
+RstMwService                          5180
+RtkAudioService64                     3656
+RtkNGUI64                            11120
+rundll32                              8660
+RuntimeBroker                         2316
+RuntimeBroker                         5796
+RuntimeBroker                        10036
+RuntimeBroker                        13428
+RuntimeBroker                        13696
+RuntimeBroker                        15480
+SearchApp                             5908
+SearchFilterHost                      9360
+SearchIndexer                         6252
+SearchProtocolHost                    9460
+Secure System                           56
+SecurityHealthService                10988
+SecurityHealthSystray                16348
+ServiceHub.DataWarehouseHost          9148
+ServiceHub.Host.AnyCPU               16256
+ServiceHub.Host.AnyCPU               17016
+ServiceHub.Host.dotnet.x64            3544
+ServiceHub.Host.dotnet.x64            5344
+ServiceHub.Host.dotnet.x64            7304
+ServiceHub.IdentityHost              11148
+ServiceHub.IdentityHost              16324
+ServiceHub.IndexingService            6660
+ServiceHub.IndexingService           20164
+ServiceHub.IntellicodeModelService    1684
+ServiceHub.IntellicodeModelService   15048
+ServiceHub.RoslynCodeAnalysisService  1900
+ServiceHub.RoslynCodeAnalysisService 10944
+ServiceHub.TestWindowStoreHost       14388
+ServiceHub.TestWindowStoreHost       19812
+ServiceHub.ThreadedWaitDialog        15592
+ServiceHub.ThreadedWaitDialog        18524
+ServiceHub.VSDetouredHost            11136
+ServiceHub.VSDetouredHost            15332
+services                               828
+ShellExperienceHost                  10296
+sihost                                9652
+smartscreen                          23496
+smss                                   560
+spoolsv                               4696
+StandardCollector.Service            11384
+StartMenuExperienceHost              16276
+svchost                                776
+svchost                                980
+svchost                               1092
+svchost                               1140
+svchost                               1144
+svchost                               1264
+svchost                               1280
+svchost                               1320
+svchost                               1332
+svchost                               1352
+svchost                               1380
+svchost                               1396
+svchost                               1424
+svchost                               1568
+svchost                               1648
+svchost                               1692
+svchost                               1928
+svchost                               1964
+svchost                               2180
+svchost                               2256
+svchost                               2356
+svchost                               2456
+svchost                               2516
+svchost                               2532
+svchost                               2552
+svchost                               2616
+svchost                               2624
+svchost                               2656
+svchost                               2880
+svchost                               2904
+svchost                               3000
+svchost                               3008
+svchost                               3040
+svchost                               3148
+svchost                               3184
+svchost                               3228
+svchost                               3316
+svchost                               3432
+svchost                               3440
+svchost                               3572
+svchost                               3680
+svchost                               3816
+svchost                               4008
+svchost                               4064
+svchost                               4072
+svchost                               4080
+svchost                               4316
+svchost                               4332
+svchost                               4376
+svchost                               4484
+svchost                               4504
+svchost                               4596
+svchost                               4756
+svchost                               4888
+svchost                               4904
+svchost                               4924
+svchost                               5024
+svchost                               5052
+svchost                               5116
+svchost                               5160
+svchost                               5188
+svchost                               5304
+svchost                               5564
+svchost                               5960
+svchost                               6524
+svchost                               6888
+svchost                               7112
+svchost                               7184
+svchost                               7240
+svchost                               7888
+svchost                               9204
+svchost                               9824
+svchost                               9884
+svchost                              10048
+svchost                              10096
+svchost                              10444
+svchost                              10712
+svchost                              10792
+svchost                              10816
+svchost                              11388
+svchost                              12624
+svchost                              15056
+svchost                              15364
+svchost                              16060
+svchost                              17044
+svchost                              17724
+svchost                              19760
+symsrvhost                            5412
+symsrvhost                           23320
+System                                   4
+SystemSettings                       17700
+SystemSettingsBroker                 11464
+taskhostw                            11964
+taskhostw                            15024
+taskhostw                            18132
+Taskmgr                               2480
+TerminalService                       8096
+TextInputHost                         7824
+TPMProvisioningService                5008
+UltraViewer_Service                   5348
+unsecapp                              4720
+UserOOBEBroker                        2152
+VBCSCompiler                          5288
+VsDebugConsole                       19592
+WavesSvc64                            9048
+WavesSysSvc64                         5360
+wininit                                760
+winlogon                             19892
+wlanext                               4724
+WmiPrvSE                              4104
+WmiPrvSE                             21508
+WMIRegistrationService                5472
+wslservice                            5612
+WUDFHost                               548
+
+
+
+2025-03-23 20:13:07,052 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 4
+2025-03-23 20:13:07,127 [5] INFO TerminalService.TerminalService - Hostname: DESKTOP-93MMJ3Q
+2025-03-23 20:13:07,127 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:07,198 [5] INFO TerminalService.TerminalService - IP Address: 192.168.0.114
+2025-03-23 20:13:07,198 [5] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-23 20:13:07,198 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:07,242 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - MAC Address: 86:51:20:52:41:53
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - MAC Address: 98:37:20:52:41:53
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - MAC Address: A8:27:20:52:41:53
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-23 20:13:07,243 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,324 [5] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-23 20:13:08,325 [5] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-23 20:13:08,325 [5] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-23 20:13:08,325 [5] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-23 20:13:08,325 [5] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-23 20:13:08,325 [5] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-23 20:13:08,325 [5] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-23 20:13:08,326 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,361 [5] INFO TerminalService.TerminalService - RAM: 15GB
+2025-03-23 20:13:08,391 [5] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-23 20:13:08,392 [5] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-23 20:13:08,392 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:13:08,392 [5] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-23 20:13:08,392 [5] INFO TerminalService.TerminalService - FreeSpace: 15825760256
+2025-03-23 20:13:08,392 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - FreeSpace: 51722092544
+2025-03-23 20:13:08,393 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,441 [5] INFO TerminalService.TerminalService - Firewall Profile: Domain
+2025-03-23 20:13:08,441 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:13:08,441 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,442 [5] INFO TerminalService.TerminalService - Firewall Profile: Private
+2025-03-23 20:13:08,442 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:13:08,442 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,442 [5] INFO TerminalService.TerminalService - Firewall Profile: Public
+2025-03-23 20:13:08,442 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:13:08,442 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:13:08,444 [16] INFO TerminalService.TerminalService - Published system info to MQTT.
+2025-03-23 20:14:06,172 [7] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"KillProcess","Params":"POWERPNT"}
+2025-03-23 20:14:06,172 [7] INFO TerminalService.TerminalService - Killing process: POWERPNT
+2025-03-23 20:14:07,055 [5] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 5
+2025-03-23 20:14:07,075 [5] INFO TerminalService.TerminalService - Hostname: DESKTOP-93MMJ3Q
+2025-03-23 20:14:07,075 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:07,110 [5] INFO TerminalService.TerminalService - IP Address: 192.168.0.114
+2025-03-23 20:14:07,110 [5] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-23 20:14:07,110 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:07,145 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-23 20:14:07,145 [5] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-23 20:14:07,146 [5] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-23 20:14:07,146 [5] INFO TerminalService.TerminalService - MAC Address: 86:51:20:52:41:53
+2025-03-23 20:14:07,146 [5] INFO TerminalService.TerminalService - MAC Address: 98:37:20:52:41:53
+2025-03-23 20:14:07,146 [5] INFO TerminalService.TerminalService - MAC Address: A8:27:20:52:41:53
+2025-03-23 20:14:07,146 [5] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-23 20:14:07,146 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-23 20:14:08,188 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,220 [5] INFO TerminalService.TerminalService - RAM: 15GB
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - FreeSpace: 15829069824
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-23 20:14:08,238 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - FreeSpace: 51722059776
+2025-03-23 20:14:08,239 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - Firewall Profile: Domain
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - Firewall Profile: Private
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - Firewall Profile: Public
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:14:08,265 [5] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:14:08,265 [15] INFO TerminalService.TerminalService - Published system info to MQTT.
+2025-03-23 20:14:38,656 [5] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"KillProcess","Params":"ms-teams"}
+2025-03-23 20:14:38,657 [5] INFO TerminalService.TerminalService - Killing process: ms-teams
+2025-03-23 20:15:07,068 [14] INFO TerminalService.TerminalService - Monitoring the system. Event ID: 6
+2025-03-23 20:15:07,124 [14] INFO TerminalService.TerminalService - Hostname: DESKTOP-93MMJ3Q
+2025-03-23 20:15:07,124 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:07,192 [14] INFO TerminalService.TerminalService - IP Address: 192.168.0.114
+2025-03-23 20:15:07,192 [14] INFO TerminalService.TerminalService - IP Address: fe80::472f:6947:f170:38df
+2025-03-23 20:15:07,192 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:07
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: 10:65:30:18:9B:8C
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: 68:EC:C5:CD:58:08
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: 86:51:20:52:41:53
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: 98:37:20:52:41:53
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: A8:27:20:52:41:53
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - MAC Address: 6A:EC:C5:CD:58:07
+2025-03-23 20:15:07,255 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - CPU: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - Manufacturer: GenuineIntel
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - NumberOfCores: 2
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - ThreadCount: 4
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - MaxClockSpeed: 2801 MHz
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - Architectur: 9
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - Caption: Intel64 Family 6 Model 78 Stepping 3
+2025-03-23 20:15:08,351 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,396 [14] INFO TerminalService.TerminalService - RAM: 15GB
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - DeviceID: C:
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - VolumeName: 
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - Size: 109057392640
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - FreeSpace: 15830818816
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - DeviceID: D:
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - VolumeName: New Volume
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - Size: 15724544
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - FreeSpace: 5435392
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - DeviceID: E:
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - VolumeName: 222
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - FileSystem: NTFS
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - Size: 146329825280
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - FreeSpace: 51722059776
+2025-03-23 20:15:08,432 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,467 [14] INFO TerminalService.TerminalService - Firewall Profile: Domain
+2025-03-23 20:15:08,467 [14] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:15:08,467 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,482 [14] INFO TerminalService.TerminalService - Firewall Profile: Private
+2025-03-23 20:15:08,483 [14] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:15:08,483 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,484 [14] INFO TerminalService.TerminalService - Firewall Profile: Public
+2025-03-23 20:15:08,484 [14] INFO TerminalService.TerminalService - Enabled: True
+2025-03-23 20:15:08,484 [14] INFO TerminalService.TerminalService - -------------------------------------
+2025-03-23 20:15:08,485 [9] INFO TerminalService.TerminalService - Published system info to MQTT.
+2025-03-23 20:15:50,926 [4] INFO TerminalService.TerminalService - Received MQTT Command: {"Action":"Restart","Params":""}
+2025-03-23 20:15:50,926 [4] INFO TerminalService.TerminalService - Restarting system...
+2025-03-23 20:16:33,131 [4] INFO TerminalService.TerminalService - In Onstart.
+2025-03-23 20:16:33,848 [5] ERROR TerminalService.TerminalService - MQTT Connection Failed: Error while connecting with host 'df2c46d2a9b5447ca9f473c7f369c931.s1.eu.hivemq.cloud:8883'.
