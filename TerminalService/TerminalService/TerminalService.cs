@@ -54,7 +54,11 @@ namespace TerminalService
 
         private SystemInfo GetSystemInfo()
         {
+            ConfigurationManager.RefreshSection("appSettings");
+
             var info = new SystemInfo();
+            info.DeviceId = ConfigurationManager.AppSettings["DeviceId"];
+            info.Room = ConfigurationManager.AppSettings["Room"];
 
             try
             {
@@ -63,6 +67,8 @@ namespace TerminalService
                 {
                     info.Hostname = obj["Name"].ToString();
                     log.Info("Hostname: " + obj["Name"]);
+                    log.Info("DeviceID: " + info.DeviceId);
+                    log.Info("Room: " + info.Room);
                     log.Info("-------------------------------------");
                 }
             }
@@ -395,6 +401,8 @@ namespace TerminalService
 
     class SystemInfo
     {
+        public string DeviceId { get; set; }
+        public string Room { get; set; }
         public string Hostname { get; set; }
         public string[] IPAddress { get; set; }
         public string[] MACAddress { get; set; }

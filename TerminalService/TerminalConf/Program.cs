@@ -7,7 +7,7 @@ class Program
     static void Main(string[] args)
     {
         string room = null;
-        string pcId = null;
+        string deviceId = null;
 
         if (args.Length == 0)
         {
@@ -15,8 +15,8 @@ class Program
             Console.Write("Enter room: ");
             room = Console.ReadLine();
 
-            Console.Write("Enter pc_id: ");
-            pcId = Console.ReadLine();
+            Console.Write("Enter device's id: ");
+            deviceId = Console.ReadLine();
         }
         else
         {
@@ -28,7 +28,7 @@ class Program
                 }
                 else if (args[i] == "-i" && i + 1 < args.Length)
                 {
-                    pcId = args[i + 1];
+                    deviceId = args[i + 1];
                 }
             }
         }
@@ -60,7 +60,7 @@ class Program
 
             // Cập nhật giá trị
             SetOrUpdateKey(settings, "Room", room);
-            SetOrUpdateKey(settings, "PC_ID", pcId);
+            SetOrUpdateKey(settings, "DeviceId", deviceId);
 
             config.Save(ConfigurationSaveMode.Modified);
             Console.WriteLine("Successfully updated configuration.");

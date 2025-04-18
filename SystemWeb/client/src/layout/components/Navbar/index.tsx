@@ -1,10 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import config from '../../../config';
-import { ComponentProps } from 'react';
 
-function Navbar(props: ComponentProps<any>) {
+function Navbar() {
     return (
-        <div {...props}>
+        <div className='flex flex-row justify-center'>
             <ul className="flex flex-row gap-10 font-bold text-white">
                 <li>
                     <NavLink
