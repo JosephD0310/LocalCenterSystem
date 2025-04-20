@@ -17,12 +17,12 @@ function Navbar() {
                 </li>
                 <li>
                     <NavLink
-                        to={config.routes.management}
+                        to={config.routes.devices}
                         className={({ isActive }) =>
                             isActive ? 'bg-[#85CC16] px-6 py-3 rounded-[20px]' : 'bg-transparent px-6 py-3'
                         }
                     >
-                        Management
+                        Devices
                     </NavLink>
                 </li>
             </ul>

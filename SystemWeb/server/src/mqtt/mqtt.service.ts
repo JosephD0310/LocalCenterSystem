@@ -1,11 +1,16 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { connect, MqttClient } from 'mqtt';
+import { DevicesService } from 'src/devices/devices.service';
+import { CreateDeviceDto } from 'src/devices/dto/create-device.dto';
 import { EventsGateway } from 'src/events/events.gateway';
 
 @Injectable()
 export class MqttService implements OnModuleInit {
-  constructor(private readonly eventsGateway: EventsGateway) {}
-  private client: MqttClient;
+    constructor(
+        private readonly eventsGateway: EventsGateway,
+        private readonly devicesService: DevicesService,
+    ) {}
+    private client: MqttClient;
 
     onModuleInit() {
         console.log('Hellomqtt');
@@ -22,10 +27,38 @@ export class MqttService implements OnModuleInit {
             });
         });
 
-        this.client.on('message', (topic, payload) => {
-            const data = JSON.parse(payload.toString());
-
-            this.eventsGateway.emitMqttData(data)
+        this.client.on('message', async (topic, payload) => {
+            try {
+                const data = JSON.parse(payload.toString());
+            
+                this.eventsGateway.emitMqttData(data);
+            
+                const createDeviceDto: CreateDeviceDto = {
+                  deviceId: data.DeviceId,
+                  room: data.Room,
+                  hostname: data.Hostname,
+                  ipAddresses: data.IPAddress,
+                  macAddresses: data.MACAddress,
+                  cpu: data.CPU,
+                  ram: data.RAM,
+                  drives: data.Drives,
+                  firewalls: data.Firewalls,
+                };
+            
+                const existingDevice = await this.devicesService.findByDeviceId(data.DeviceId);
+            
+                if (existingDevice) {
+                  // Cập nhật thiết bị nếu đã tồn tại
+                  await this.devicesService.update(data.DeviceId, createDeviceDto);
+                  console.log(`Updated device with ID: ${data.DeviceId}`);
+                } else {
+                  // Tạo mới nếu chưa có
+                  await this.devicesService.create(createDeviceDto);
+                  console.log(`Created new device with ID: ${data.DeviceId}`);
+                }
+              } catch (error) {
+                console.error('Error handling MQTT message:', error);
+              }
         });
     }
 

@@ -1,6 +1,7 @@
 const routes = {
     home: '/',
-    management: '/management',
+    login: '/login',
+    devices: '/devices',
 }
 
 export default routes
