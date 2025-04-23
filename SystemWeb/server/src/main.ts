@@ -9,17 +9,6 @@ async function bootstrap() {
         origin: 'http://localhost:5173',
         credentials: true,
     });
-
-    app.use(
-      session({
-        secret: 'secret-key', 
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-          maxAge: 1000 * 60 * 60, // session sống 1 giờ
-        },
-      }),
-    );
     await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

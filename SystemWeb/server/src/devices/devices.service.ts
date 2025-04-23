@@ -8,31 +8,30 @@ import { CreateDeviceDto } from './dto/create-device.dto';
 export class DevicesService {
     constructor(
         @InjectRepository(Device)
-        private devicesRepository: Repository<Device>,
+        private devicesRepo: Repository<Device>,
     ) {}
 
-    async create(createDeviceDto: CreateDeviceDto): Promise<Device> {
-        const device = this.devicesRepository.create(createDeviceDto);
-        return await this.devicesRepository.save(device);
-      }
-
-    async findByDeviceId(deviceId: string): Promise<Device | null> {
-        return await this.devicesRepository.findOne({
-            where: { deviceId },
-        });
+    findAll() {
+        return this.devicesRepo.find();
     }
 
-    async update(deviceId: string, updateDeviceDto: CreateDeviceDto): Promise<Device> {
-        const existingDevice = await this.findByDeviceId(deviceId);
-        if (!existingDevice) {
-            throw new Error(`Device with ID ${deviceId} not found`);
-        }
-
-        const updated = this.devicesRepository.merge(existingDevice, updateDeviceDto);
-        return await this.devicesRepository.save(updated);
+    findOne(uuid: string) {
+        return this.devicesRepo.findOneBy({ uuid });
     }
 
-    async findAll(): Promise<Device[]> {
-        return this.devicesRepository.find();
+    create(createDeviceDto: CreateDeviceDto) {
+        const device = this.devicesRepo.create(createDeviceDto);
+        return this.devicesRepo.save(device);
+    }
+
+    async update(uuid: string, dto: CreateDeviceDto) {
+        const existing = await this.devicesRepo.findOneBy({ uuid });
+        if (!existing) return null;
+        const updated = this.devicesRepo.merge(existing, dto);
+        return this.devicesRepo.save(updated);
+    }
+
+    delete(deviceId: number) {
+        return this.devicesRepo.delete(deviceId);
     }
 }

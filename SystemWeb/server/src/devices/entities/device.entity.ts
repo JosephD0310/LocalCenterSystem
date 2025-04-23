@@ -2,53 +2,56 @@ import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeor
 
 @Entity()
 export class Device {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  deviceId: string;
+    @Column()
+    uuid: string;
 
-  @Column()
-  room: string;
+    @Column()
+    deviceId: number;
 
-  @Column()
-  hostname: string;
+    @Column()
+    room: string;
 
-  @Column('json')
-  ipAddresses: string[]; // IPv4 và IPv6
+    @Column()
+    hostname: string;
 
-  @Column('json')
-  macAddresses: string[];
+    @Column('json')
+    ipAddresses: string[]; // IPv4 và IPv6
 
-  @Column('json')
-  cpu: {
-    Model: string;
-    Manufacturer: string;
-    NumberOfCores: number;
-    ThreadCount: number;
-    MaxClockSpeedMHz: number;
-    Architecture: number;
-    Caption: string;
-  };
+    @Column('json')
+    macAddresses: string[];
 
-  @Column()
-  ram: number; // GB
+    @Column('json')
+    cpu: {
+        Model: string;
+        Manufacturer: string;
+        NumberOfCores: number;
+        ThreadCount: number;
+        MaxClockSpeedMHz: number;
+        Architecture: number;
+        Caption: string;
+    };
 
-  @Column('json')
-  drives: {
-    DeviceID: string;
-    VolumeName: string;
-    FileSystem: string;
-    Size: number;
-    FreeSpace: number;
-  }[];
+    @Column()
+    ram: number; // GB
 
-  @Column('json')
-  firewalls: {
-    ProfileName: string;
-    Enabled: boolean;
-  }[];
+    @Column('json')
+    drives: {
+        DeviceID: string;
+        VolumeName: string;
+        FileSystem: string;
+        Size: number;
+        FreeSpace: number;
+    }[];
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @Column('json')
+    firewalls: {
+        ProfileName: string;
+        Enabled: boolean;
+    }[];
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

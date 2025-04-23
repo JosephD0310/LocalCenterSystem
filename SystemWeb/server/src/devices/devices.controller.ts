@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { DevicesService } from './devices.service';
 import { CreateDeviceDto } from './dto/create-device.dto';
 
@@ -6,23 +6,28 @@ import { CreateDeviceDto } from './dto/create-device.dto';
 export class DevicesController {
     constructor(private readonly devicesService: DevicesService) {}
 
-    @Post()
-    create(@Body() createDeviceDto: CreateDeviceDto) {
-        return this.devicesService.create(createDeviceDto);
-    }
-
     @Get()
-    findAll() {
+    getAll() {
         return this.devicesService.findAll();
     }
 
-    @Get(':deviceId')
-    findOne(@Param('deviceId') deviceId: string) {
-        return this.devicesService.findByDeviceId(deviceId);
+    @Get(':uuid')
+    getOne(@Param('uuid') uuid: string) {
+        return this.devicesService.findOne(uuid);
     }
 
-    @Put(':deviceId')
-    update(@Param('deviceId') deviceId: string, @Body() updateDeviceDto: CreateDeviceDto) {
-        return this.devicesService.update(deviceId, updateDeviceDto);
+    @Post()
+    create(@Body() dto: CreateDeviceDto) {
+        return this.devicesService.create(dto);
+    }
+
+    @Put(':uuid')
+    update(@Param('uuid') uuid: string, @Body() dto: CreateDeviceDto) {
+        return this.devicesService.update(uuid, dto);
+    }
+
+    @Delete(':deviceId')
+    remove(@Param('deviceId') deviceId: number) {
+        return this.devicesService.delete(deviceId);
     }
 }

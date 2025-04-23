@@ -17,6 +17,9 @@ using MQTTnet.Client;
 using MQTTnet;
 using MQTTnet.Server;
 using System.Net.Mail;
+using Newtonsoft.Json;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace TerminalService
 {
@@ -52,11 +55,60 @@ namespace TerminalService
             }
         }
 
+        protected override async void OnStart(string[] args)
+        {
+            log.Info("In Onstart.");
+            await ConnectMqttAsync();
+            timer = new System.Timers.Timer(pollingInterval);
+            timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
+            timer.Start();
+        }
+
+        protected override void OnStop()
+        {
+            log.Info("In OnStop.");
+        }
+
+        protected override void OnContinue()
+        {
+            log.Info("In OnContinue.");
+        }
+
+        private async Task ConnectMqttAsync()
+        {
+            var mqttFactory = new MqttFactory();
+            mqttClient = mqttFactory.CreateMqttClient();
+
+            var mqttClientOptions = new MqttClientOptionsBuilder()
+                .WithTcpServer(ConfigurationManager.AppSettings["MqttBroker"],
+                               int.Parse(ConfigurationManager.AppSettings["MqttPort"]))
+                .WithCredentials(ConfigurationManager.AppSettings["MqttUsername"],
+                                 ConfigurationManager.AppSettings["MqttPassword"])
+                .WithClientId(ConfigurationManager.AppSettings["MqttClientId"])
+                .WithCleanSession()
+                .WithTlsOptions(o => o.WithSslProtocols(System.Security.Authentication.SslProtocols.Tls12))
+                .Build();
+
+            try
+            {
+                await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
+                log.Info("Connected to MQTT broker.");
+
+                await SubscribeToCommands();
+            }
+            catch (Exception ex)
+            {
+                log.Error("MQTT Connection Failed: " + ex.Message);
+            }
+        }
+
         private SystemInfo GetSystemInfo()
         {
             ConfigurationManager.RefreshSection("appSettings");
 
             var info = new SystemInfo();
+
+            info.UUID = RegistryHelper.GetOrCreateUUID();
             info.DeviceId = ConfigurationManager.AppSettings["DeviceId"];
             info.Room = ConfigurationManager.AppSettings["Room"];
 
@@ -67,6 +119,7 @@ namespace TerminalService
                 {
                     info.Hostname = obj["Name"].ToString();
                     log.Info("Hostname: " + obj["Name"]);
+                    log.Info("UUID: " + info.UUID);
                     log.Info("DeviceID: " + info.DeviceId);
                     log.Info("Room: " + info.Room);
                     log.Info("-------------------------------------");
@@ -85,7 +138,7 @@ namespace TerminalService
                     if (queryObj["IPAddress"] != null)
                     {
                         string[] ipAddresses = (string[])(queryObj["IPAddress"]);
-                        info.IPAddress = ipAddresses; 
+                        info.IPAddress = ipAddresses;
                         foreach (string ip in ipAddresses)
                         {
                             log.Info("IP Address: " + ip);
@@ -119,7 +172,7 @@ namespace TerminalService
                     }
                 }
 
-                info.MACAddress = macList.ToArray(); 
+                info.MACAddress = macList.ToArray();
                 log.Info("-------------------------------------");
             }
             catch (ManagementException e)
@@ -188,7 +241,7 @@ namespace TerminalService
                     log.Info("-------------------------------------");
                     drives.Add(new DriveInfo
                     {
-                        DeviceID = queryObj["DeviceID"]?.ToString(),
+                        Disk = queryObj["DeviceID"]?.ToString(),
                         VolumeName = queryObj["VolumeName"]?.ToString(),
                         FileSystem = queryObj["FileSystem"]?.ToString(),
                         Size = queryObj["Size"] != null ? Convert.ToInt64(queryObj["Size"]) : 0,
@@ -231,53 +284,6 @@ namespace TerminalService
             }
 
             return info;
-        }
-
-        protected override async void OnStart(string[] args)
-        {
-            log.Info("In Onstart.");
-            await ConnectMqttAsync();
-            timer = new System.Timers.Timer(pollingInterval);
-            timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
-            timer.Start();
-        }
-
-        protected override void OnStop()
-        {
-            log.Info("In OnStop.");
-        }
-
-        protected override void OnContinue()
-        {
-            log.Info("In OnContinue.");
-        }
-
-        private async Task ConnectMqttAsync()
-        {
-            var mqttFactory = new MqttFactory();
-            mqttClient = mqttFactory.CreateMqttClient();
-
-            var mqttClientOptions = new MqttClientOptionsBuilder()
-                .WithTcpServer(ConfigurationManager.AppSettings["MqttBroker"],
-                               int.Parse(ConfigurationManager.AppSettings["MqttPort"]))
-                .WithCredentials(ConfigurationManager.AppSettings["MqttUsername"],
-                                 ConfigurationManager.AppSettings["MqttPassword"])
-                .WithClientId(ConfigurationManager.AppSettings["MqttClientId"])
-                .WithCleanSession()
-                .WithTlsOptions(o => o.WithSslProtocols(System.Security.Authentication.SslProtocols.Tls12))
-                .Build();
-
-            try
-            {
-                await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
-                log.Info("Connected to MQTT broker.");
-
-                await SubscribeToCommands();
-            }
-            catch (Exception ex)
-            {
-                log.Error("MQTT Connection Failed: " + ex.Message);
-            }
         }
 
         private async Task SubscribeToCommands()
@@ -401,6 +407,7 @@ namespace TerminalService
 
     class SystemInfo
     {
+        public string UUID { get; set; }
         public string DeviceId { get; set; }
         public string Room { get; set; }
         public string Hostname { get; set; }
@@ -425,7 +432,7 @@ namespace TerminalService
 
     public class DriveInfo
     {
-        public string DeviceID { get; set; }
+        public string Disk { get; set; }
         public string VolumeName { get; set; }
         public string FileSystem { get; set; }
         public long Size { get; set; }
@@ -439,4 +446,3 @@ namespace TerminalService
     }
 
 }
-

@@ -81,6 +81,7 @@
     <Compile Include="ProjectInstaller.Designer.cs">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistryHelper.cs" />
     <Compile Include="TerminalService.cs">
       <SubType>Component</SubType>
     </Compile>

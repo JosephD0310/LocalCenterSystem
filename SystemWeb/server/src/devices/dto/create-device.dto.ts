@@ -1,8 +1,11 @@
-import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
+import { IsArray, IsDate, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class CreateDeviceDto {
   @IsString()
-  deviceId: string;
+  uuid: string;
+
+  @IsNumber()
+  deviceId: number;
 
   @IsString()
   room: string;
@@ -43,5 +46,5 @@ export class CreateDeviceDto {
   firewalls: {
     ProfileName: string;
     Enabled: boolean;
-  }[];
+  }[]
 }
