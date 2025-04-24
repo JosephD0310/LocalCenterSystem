@@ -35,16 +35,16 @@ export class MqttService implements OnModuleInit {
                 this.eventsGateway.emitMqttData(data);
             
                 const createDeviceDto: CreateDeviceDto = {
-                  uuid: data.UUID,
-                  deviceId: data.DeviceId,
-                  room: data.Room,
-                  hostname: data.Hostname,
-                  ipAddresses: data.IPAddress,
-                  macAddresses: data.MACAddress,
-                  cpu: data.CPU,
-                  ram: data.RAM,
-                  drives: data.Drives,
-                  firewalls: data.Firewalls
+                  uuid: data.uuid,
+                  deviceId: data.deviceId,
+                  room: data.room,
+                  hostname: data.hostname,
+                  ipAddress: data.ipAddress,
+                  macAddress: data.macAddress,
+                  cpu: data.cpu,
+                  ram: data.ram,
+                  drives: data.drives,
+                  firewalls: data.firewalls
                 };
             
                 const existingDevice = await this.devicesService.findOne(data.UUID);
@@ -52,11 +52,11 @@ export class MqttService implements OnModuleInit {
                 if (existingDevice) {
                   // Cập nhật thiết bị nếu đã tồn tại
                   await this.devicesService.update(data.UUID, createDeviceDto);
-                  console.log(`Updated device with ID: ${data.DeviceId}`);
+                  console.log(`Updated device with ID: ${data.deviceId}`);
                 } else {
                   // Tạo mới nếu chưa có
                   await this.devicesService.create(createDeviceDto);
-                  console.log(`Created new device with ID: ${data.DeviceId}`);
+                  console.log(`Created new device with ID: ${data.deviceId}`);
                 }
               } catch (error) {
                 console.error('Error handling MQTT message:', error);

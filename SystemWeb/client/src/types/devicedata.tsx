@@ -1,10 +1,11 @@
 export type DeviceData = {
     id: number;
+    uuid: string;
     deviceId: number;
     room: string;
     hostname: string;
-    ipAddresses: string[];
-    macAddresses: string[];
+    ipAddress: string[];
+    macAddress: string[];
     cpu: {
         Model: string;
         Manufacturer: string;
@@ -16,7 +17,7 @@ export type DeviceData = {
     };
     ram: number; // GB
     drives: {
-        DeviceID: string;
+        Disk: string;
         VolumeName: string;
         FileSystem: string;
         Size: number; // bytes

@@ -108,20 +108,20 @@ namespace TerminalService
 
             var info = new SystemInfo();
 
-            info.UUID = RegistryHelper.GetOrCreateUUID();
-            info.DeviceId = ConfigurationManager.AppSettings["DeviceId"];
-            info.Room = ConfigurationManager.AppSettings["Room"];
+            info.uuid = RegistryHelper.GetOrCreateUUID();
+            info.deviceId = ConfigurationManager.AppSettings["DeviceId"];
+            info.room = ConfigurationManager.AppSettings["Room"];
 
             try
             {
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    info.Hostname = obj["Name"].ToString();
+                    info.hostname = obj["Name"].ToString();
                     log.Info("Hostname: " + obj["Name"]);
-                    log.Info("UUID: " + info.UUID);
-                    log.Info("DeviceID: " + info.DeviceId);
-                    log.Info("Room: " + info.Room);
+                    log.Info("UUID: " + info.uuid);
+                    log.Info("DeviceID: " + info.deviceId);
+                    log.Info("Room: " + info.room);
                     log.Info("-------------------------------------");
                 }
             }
@@ -138,7 +138,7 @@ namespace TerminalService
                     if (queryObj["IPAddress"] != null)
                     {
                         string[] ipAddresses = (string[])(queryObj["IPAddress"]);
-                        info.IPAddress = ipAddresses;
+                        info.ipAddress = ipAddresses;
                         foreach (string ip in ipAddresses)
                         {
                             log.Info("IP Address: " + ip);
@@ -172,7 +172,7 @@ namespace TerminalService
                     }
                 }
 
-                info.MACAddress = macList.ToArray();
+                info.macAddress = macList.ToArray();
                 log.Info("-------------------------------------");
             }
             catch (ManagementException e)
@@ -201,7 +201,7 @@ namespace TerminalService
                     log.Info($"Architectur: {queryObj["Architecture"]}");
                     log.Info($"Caption: {queryObj["Caption"]}");
                 }
-                info.CPU = cpuInfo;
+                info.cpu = cpuInfo;
                 log.Info("-------------------------------------");
             }
             catch (ManagementException e)
@@ -215,7 +215,7 @@ namespace TerminalService
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
                     long ram = Convert.ToInt64(queryObj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024);
-                    info.RAM = ram;
+                    info.ram = ram;
                     log.Info("RAM: " + ram + "GB");
                 }
             }
@@ -248,7 +248,7 @@ namespace TerminalService
                         FreeSpace = queryObj["FreeSpace"] != null ? Convert.ToInt64(queryObj["FreeSpace"]) : 0
                     });
                 }
-                info.Drives = drives;
+                info.drives = drives;
             }
             catch (ManagementException e)
             {
@@ -276,7 +276,7 @@ namespace TerminalService
                         Enabled = isEnabled
                     });
                 }
-                info.Firewalls = firewalls;
+                info.firewalls = firewalls;
             }
             catch (ManagementException e)
             {
@@ -407,16 +407,16 @@ namespace TerminalService
 
     class SystemInfo
     {
-        public string UUID { get; set; }
-        public string DeviceId { get; set; }
-        public string Room { get; set; }
-        public string Hostname { get; set; }
-        public string[] IPAddress { get; set; }
-        public string[] MACAddress { get; set; }
-        public CPUInfo CPU { get; set; }
-        public long RAM { get; set; }
-        public List<DriveInfo> Drives { get; set; }
-        public List<FirewallProfile> Firewalls { get; set; }
+        public string uuid { get; set; }
+        public string deviceId { get; set; }
+        public string room { get; set; }
+        public string hostname { get; set; }
+        public string[] ipAddress { get; set; }
+        public string[] macAddress { get; set; }
+        public CPUInfo cpu { get; set; }
+        public long ram { get; set; }
+        public List<DriveInfo> drives { get; set; }
+        public List<FirewallProfile> firewalls { get; set; }
     }
 
     public class CPUInfo

@@ -18,7 +18,7 @@ function DeviceCard({item} : CardProps) {
                     <div className="w-full">
                         <h3 className="text-2xl font-bold mb-2">{item.hostname}</h3>
                         <div className="w-full flex flex-row justify-between items-center">
-                            <p className="text-xl text-gray-600">{item.ipAddresses[0]}</p>
+                            <p className="text-xl text-gray-600">{item.ipAddress[0]}</p>
                             <Status content="healthy" />
                         </div>
                     </div>

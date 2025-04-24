@@ -18,10 +18,10 @@ export class Device {
     hostname: string;
 
     @Column('json')
-    ipAddresses: string[]; // IPv4 và IPv6
+    ipAddress: string[]; // IPv4 và IPv6
 
     @Column('json')
-    macAddresses: string[];
+    macAddress: string[];
 
     @Column('json')
     cpu: {

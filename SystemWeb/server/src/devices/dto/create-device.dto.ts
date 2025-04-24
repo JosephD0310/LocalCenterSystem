@@ -14,10 +14,10 @@ export class CreateDeviceDto {
   hostname: string;
 
   @IsArray()
-  ipAddresses: string[];
+  ipAddress: string[];
 
   @IsArray()
-  macAddresses: string[];
+  macAddress: string[];
 
   @IsObject()
   cpu: {
