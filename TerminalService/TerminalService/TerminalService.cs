@@ -29,6 +29,8 @@ namespace TerminalService
         private int eventId = 1;
         private System.Timers.Timer timer;
         private int pollingInterval;
+        private System.Timers.Timer reconnectTimer;
+        private const int ReconnectInterval = 30000;
         private IMqttClient mqttClient;
         public TerminalService()
         {
@@ -39,6 +41,12 @@ namespace TerminalService
         public async void OnTimer(object sender, ElapsedEventArgs args)
         {
             log.Info($"Monitoring the system. Event ID: {eventId++}");
+
+            mqttClient.DisconnectedAsync += async e =>
+            {
+                log.Warn("MQTT disconnected. Will try to reconnect...");
+                await ConnectMqttAsync();
+            };
 
             if (mqttClient != null && mqttClient.IsConnected)
             {
@@ -95,10 +103,19 @@ namespace TerminalService
                 log.Info("Connected to MQTT broker.");
 
                 await SubscribeToCommands();
+
+                reconnectTimer?.Stop();
             }
             catch (Exception ex)
             {
                 log.Error("MQTT Connection Failed: " + ex.Message);
+
+                if (reconnectTimer == null)
+                {
+                    reconnectTimer = new System.Timers.Timer(ReconnectInterval);
+                    reconnectTimer.Elapsed += async (s, e) => await ConnectMqttAsync();
+                }
+                reconnectTimer.Start();
             }
         }
 
@@ -108,9 +125,22 @@ namespace TerminalService
 
             var info = new SystemInfo();
 
-            info.uuid = RegistryHelper.GetOrCreateUUID();
             info.deviceId = ConfigurationManager.AppSettings["DeviceId"];
             info.room = ConfigurationManager.AppSettings["Room"];
+
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    info.serialNumber = obj["SerialNumber"].ToString();
+                    log.Info("Serial Number: " + obj["SerialNumber"]);
+                }
+            }
+            catch (ManagementException e)
+            {
+                log.Error("Error querying serial number: " + e.Message);
+            }
 
             try
             {
@@ -119,7 +149,6 @@ namespace TerminalService
                 {
                     info.hostname = obj["Name"].ToString();
                     log.Info("Hostname: " + obj["Name"]);
-                    log.Info("UUID: " + info.uuid);
                     log.Info("DeviceID: " + info.deviceId);
                     log.Info("Room: " + info.room);
                     log.Info("-------------------------------------");
@@ -128,6 +157,20 @@ namespace TerminalService
             catch (ManagementException e)
             {
                 log.Error("Error querying Hostname: " + e.Message);
+            }
+
+            try
+            {
+                string publicIp = RunPowerShellCommand("Invoke-RestMethod ifcfg.me").Result;
+                if (!string.IsNullOrEmpty(publicIp))
+                {
+                    info.publicIp = publicIp;
+                    log.Info("Public IP Address: " + publicIp);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting public IP: " + ex.Message);
             }
 
             try
@@ -361,7 +404,7 @@ namespace TerminalService
             }
         }
 
-        private async Task RunPowerShellCommand(string command)
+        private async Task<string> RunPowerShellCommand(string command)
         {
             try
             {
@@ -388,11 +431,13 @@ namespace TerminalService
                         log.Error($"PowerShell Error: {error}");
                     }
 
+                    return output;
                 }
             }
             catch (Exception ex)
             {
                 log.Error($"Error executing PowerShell command: {ex.Message}");
+                return string.Empty;
             }
         }
 
@@ -407,11 +452,12 @@ namespace TerminalService
 
     class SystemInfo
     {
-        public string uuid { get; set; }
+        public string serialNumber { get; set; }
         public string deviceId { get; set; }
         public string room { get; set; }
         public string hostname { get; set; }
         public string[] ipAddress { get; set; }
+        public string publicIp { get; set; }
         public string[] macAddress { get; set; }
         public CPUInfo cpu { get; set; }
         public long ram { get; set; }

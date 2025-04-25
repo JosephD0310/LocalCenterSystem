@@ -6,7 +6,6 @@ E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\Termina
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\log4net.dll
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\MQTTnet.dll
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\Newtonsoft.Json.dll
-E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\TerminalService.pdb
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\TerminalService.exe.config
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\log4net.pdb
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\log4net.xml
@@ -17,3 +16,4 @@ E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\obj\Debug\Termina
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\obj\Debug\Terminal.F55ED56A.Up2Date
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\obj\Debug\TerminalConf.exe
 E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\obj\Debug\TerminalConf.pdb
+E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalConf\bin\Debug\TerminalService.pdb

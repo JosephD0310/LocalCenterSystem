@@ -47,6 +47,7 @@ function Login() {
         e.preventDefault();
         const result = await checkHustTeacher(credentials.account, credentials.password);
         if (result.success) {
+            localStorage.setItem("isLoggedIn", "true");
             navigate('/');
             console.log(result.message)
         } else {

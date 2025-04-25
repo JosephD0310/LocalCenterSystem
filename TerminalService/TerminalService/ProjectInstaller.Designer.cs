@@ -39,7 +39,7 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "A terminal service";
+            this.serviceInstaller1.Description = "TerminalService created by DangHaiMaiLinh 20210529";
             this.serviceInstaller1.DisplayName = "Terminal Service";
             this.serviceInstaller1.ServiceName = "TerminalService";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
