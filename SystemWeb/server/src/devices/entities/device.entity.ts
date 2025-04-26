@@ -1,57 +1,46 @@
-import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class Device {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    uuid: string;
-
-    @Column()
-    deviceId: number;
-
-    @Column()
+  
+    @Column({ type: 'varchar', length: 100, nullable: true })
+    serialNumber: string;
+  
+    @Column({ type: 'varchar', length: 100, nullable: true })
+    deviceId: string;
+  
+    @Column({ type: 'varchar', length: 100, nullable: true })
     room: string;
-
-    @Column()
+  
+    @Column({ type: 'varchar', length: 100, nullable: true })
     hostname: string;
-
-    @Column('json')
-    ipAddress: string[]; // IPv4 và IPv6
-
-    @Column('json')
+  
+    @Column({ type: 'varchar', length: 100, nullable: true })
+    publicIp: string;
+  
+    @Column({ type: 'json', nullable: true })
+    ipAddress: string[];
+  
+    @Column({ type: 'json', nullable: true })
     macAddress: string[];
-
-    @Column('json')
-    cpu: {
-        Model: string;
-        Manufacturer: string;
-        NumberOfCores: number;
-        ThreadCount: number;
-        MaxClockSpeedMHz: number;
-        Architecture: number;
-        Caption: string;
-    };
-
-    @Column()
-    ram: number; // GB
-
-    @Column('json')
-    drives: {
-        DeviceID: string;
-        VolumeName: string;
-        FileSystem: string;
-        Size: number;
-        FreeSpace: number;
-    }[];
-
-    @Column('json')
-    firewalls: {
-        ProfileName: string;
-        Enabled: boolean;
-    }[];
-
-    @UpdateDateColumn()
+  
+    @Column({ type: 'json', nullable: true })
+    cpu: any;
+  
+    @Column({ type: 'json', nullable: true })
+    ram: any;
+  
+    @Column({ type: 'json', nullable: true })
+    diskDrive: any;
+  
+    @Column({ type: 'json', nullable: true })
+    logicalDisks: any[];
+  
+    @Column({ type: 'json', nullable: true })
+    firewalls: any[];
+  
+    @CreateDateColumn({ type: 'timestamp' })
     updatedAt: Date;
-}
+  }

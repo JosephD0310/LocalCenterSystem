@@ -21,7 +21,7 @@ function Devices() {
     useEffect(() => {
         if (socketData) {
             setDevices(prevDevices => {
-                const index = prevDevices.findIndex(d => d.uuid === socketData.uuid);
+                const index = prevDevices.findIndex(d => d.serialNumber === socketData.serialNumber);
 
                 if (index !== -1) {
                     // Đã tồn tại -> cập nhật thông tin
@@ -43,7 +43,7 @@ function Devices() {
                 {loading ? (
                     'Loading please wait...'
                 ) : (
-                    devices.map((item) => <DeviceCard key={item.uuid} item={item} />)
+                    devices.map((item) => <DeviceCard key={item.serialNumber} item={item} />)
                 )}
             </div>
         </div>

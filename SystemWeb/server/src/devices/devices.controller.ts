@@ -6,14 +6,14 @@ import { CreateDeviceDto } from './dto/create-device.dto';
 export class DevicesController {
     constructor(private readonly devicesService: DevicesService) {}
 
-    @Get()
-    getAll() {
-        return this.devicesService.findAll();
+    @Get('latest-all')
+    async getLatestOfAll() {
+        return this.devicesService.findLatestOfAllDevices();
     }
 
-    @Get(':uuid')
-    getOne(@Param('uuid') uuid: string) {
-        return this.devicesService.findOne(uuid);
+    @Get('history/:serialNumber')
+    getHistory(@Param('serialNumber') serialNumber: string) {
+        return this.devicesService.findAllBySerialNumber(serialNumber);
     }
 
     @Post()
@@ -21,13 +21,8 @@ export class DevicesController {
         return this.devicesService.create(dto);
     }
 
-    @Put(':uuid')
-    update(@Param('uuid') uuid: string, @Body() dto: CreateDeviceDto) {
-        return this.devicesService.update(uuid, dto);
-    }
-
-    @Delete(':deviceId')
-    remove(@Param('deviceId') deviceId: number) {
-        return this.devicesService.delete(deviceId);
+    @Delete(':serialNumber')
+    remove(@Param('serialNumber') serialNumber: string) {
+        return this.devicesService.delete(serialNumber);
     }
 }

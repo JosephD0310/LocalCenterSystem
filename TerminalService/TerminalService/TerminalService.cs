@@ -20,6 +20,7 @@ using System.Net.Mail;
 using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace TerminalService
 {
@@ -128,6 +129,7 @@ namespace TerminalService
             info.deviceId = ConfigurationManager.AppSettings["DeviceId"];
             info.room = ConfigurationManager.AppSettings["Room"];
 
+            // Get Serial Number of Mainboard
             try
             {
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
@@ -142,6 +144,7 @@ namespace TerminalService
                 log.Error("Error querying serial number: " + e.Message);
             }
 
+            // Get Device BasicInfo
             try
             {
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
@@ -159,6 +162,7 @@ namespace TerminalService
                 log.Error("Error querying Hostname: " + e.Message);
             }
 
+            // Get Public IP
             try
             {
                 string publicIp = RunPowerShellCommand("Invoke-RestMethod ifcfg.me").Result;
@@ -173,6 +177,7 @@ namespace TerminalService
                 log.Error("Error getting public IP: " + ex.Message);
             }
 
+            // Get IP Address Info
             try
             {
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = TRUE");
@@ -196,6 +201,7 @@ namespace TerminalService
                 log.Error("Error querying IP Address: " + e.Message);
             }
 
+            // Get MAC Address Info
             try
             {
                 List<string> macList = new List<string>();
@@ -223,27 +229,29 @@ namespace TerminalService
                 log.Error("Error querying MAC Address: " + e.Message);
             }
 
+            // Get CPU Info
             try
             {
                 var cpuInfo = new CPUInfo();
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
-                    cpuInfo.Model = queryObj["Name"]?.ToString();
-                    cpuInfo.Manufacturer = queryObj["Manufacturer"]?.ToString();
-                    cpuInfo.NumberOfCores = Convert.ToInt32(queryObj["NumberOfCores"]);
-                    cpuInfo.ThreadCount = Convert.ToInt32(queryObj["ThreadCount"]);
-                    cpuInfo.MaxClockSpeedMHz = Convert.ToInt32(queryObj["MaxClockSpeed"]);
-                    cpuInfo.Architecture = Convert.ToInt32(queryObj["Architecture"]);
-                    cpuInfo.Caption = queryObj["Caption"]?.ToString();
+                    cpuInfo.name = queryObj["Name"]?.ToString();
+                    cpuInfo.numberOfCores = Convert.ToInt32(queryObj["NumberOfCores"]);
+                    cpuInfo.threadCount = Convert.ToInt32(queryObj["ThreadCount"]);
+                    cpuInfo.maxClockSpeed = Convert.ToInt32(queryObj["MaxClockSpeed"]);
                     log.Info($"CPU: {queryObj["Name"]}");
-                    log.Info($"Manufacturer: {queryObj["Manufacturer"]}");
                     log.Info($"NumberOfCores: {queryObj["NumberOfCores"]}");
                     log.Info($"ThreadCount: {queryObj["ThreadCount"]}");
                     log.Info($"MaxClockSpeed: {queryObj["MaxClockSpeed"]} MHz");
-                    log.Info($"Architectur: {queryObj["Architecture"]}");
-                    log.Info($"Caption: {queryObj["Caption"]}");
                 }
+
+                var cpuUsage = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+                cpuUsage.NextValue(); // Bắt buộc gọi 1 lần đầu, giá trị sẽ = 0
+                System.Threading.Thread.Sleep(1000); // Chờ 1s cho giá trị cập nhật
+                cpuInfo.usage = cpuUsage.NextValue();
+                log.Info("CPU Usage: " + cpuUsage.NextValue() + " %");
+
                 info.cpu = cpuInfo;
                 log.Info("-------------------------------------");
             }
@@ -252,52 +260,83 @@ namespace TerminalService
                 log.Error("Error query CPU Info: " + e.Message);
             }
 
+            // Get RAM Info
             try
             {
+                var ramInfo = new RAMInfo();
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_ComputerSystem");
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
-                    long ram = Convert.ToInt64(queryObj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024);
-                    info.ram = ram;
-                    log.Info("RAM: " + ram + "GB");
+                    ramInfo.total = Convert.ToDouble(queryObj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024);
+                    log.Info("RAM: " + ramInfo.total + "GB");
                 }
+
+                var ramAvailable = new PerformanceCounter("Memory", "Available MBytes");
+                ramInfo.available = ramAvailable.NextValue();
+                log.Info("Available RAM: " + ramAvailable.NextValue() + " MB");
+
+                info.ram = ramInfo;
+                log.Info("-------------------------------------");
             }
             catch (ManagementException e)
             {
                 log.Error("Error querying RAM Info: " + e.Message);
             }
 
+            // Get Disk Drive Info
             try
             {
-                List<DriveInfo> drives = new List<DriveInfo>();
+                var diskDrive = new DiskDrive();
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_DiskDrive");
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    diskDrive.model = queryObj["Model"]?.ToString();
+                    ulong? sizeBytes = queryObj["Size"] as ulong?;
+                    diskDrive.size = sizeBytes.HasValue ? (int)(sizeBytes.Value / (1024 * 1024 * 1024)) : 0;
+
+                    log.Info($"Disk: {diskDrive.model} ({diskDrive.size} GB)");
+                }
+
+                info.diskDrive = diskDrive;
+                log.Info("-------------------------------------");
+            }
+            catch (ManagementException e)
+            {
+                log.Error("Error querying DiskDrive Info: " + e.Message);
+            }
+
+            // Get Logical Disk Info
+            try
+            {
+                List<LogicalDisk> disks = new List<LogicalDisk>();
 
                 ManagementObjectSearcher searcher =
                     new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_LogicalDisk");
 
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
-                    log.Info($"DeviceID: {queryObj["DeviceID"]}");
-                    log.Info($"VolumeName: {queryObj["VolumeName"]}");
-                    log.Info($"FileSystem: {queryObj["FileSystem"]}");
+                    disks.Add(new LogicalDisk
+                    {
+                        name = queryObj["Name"]?.ToString(),
+                        volumeName = queryObj["VolumeName"]?.ToString(),
+                        size = queryObj["Size"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["Size"]) / (1024 * 1024 * 1024), 1) : 0,
+                        freeSpace = queryObj["FreeSpace"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["FreeSpace"]) / (1024 * 1024 * 1024), 1) : 0
+                    });
+
+                    log.Info($"Name: {queryObj["Name"]} {queryObj["VolumeName"]}");
                     log.Info($"Size: {queryObj["Size"]}");
                     log.Info($"FreeSpace: {queryObj["FreeSpace"]}");
                     log.Info("-------------------------------------");
-                    drives.Add(new DriveInfo
-                    {
-                        Disk = queryObj["DeviceID"]?.ToString(),
-                        VolumeName = queryObj["VolumeName"]?.ToString(),
-                        FileSystem = queryObj["FileSystem"]?.ToString(),
-                        Size = queryObj["Size"] != null ? Convert.ToInt64(queryObj["Size"]) : 0,
-                        FreeSpace = queryObj["FreeSpace"] != null ? Convert.ToInt64(queryObj["FreeSpace"]) : 0
-                    });
                 }
-                info.drives = drives;
+                info.logicalDisks = disks;
             }
             catch (ManagementException e)
             {
                 log.Error("Error querying Drive Info: " + e.Message);
             }
 
+
+            // Get Firewall Info
             try
             {
                 List<FirewallProfile> firewalls = new List<FirewallProfile>();
@@ -456,33 +495,43 @@ namespace TerminalService
         public string deviceId { get; set; }
         public string room { get; set; }
         public string hostname { get; set; }
-        public string[] ipAddress { get; set; }
         public string publicIp { get; set; }
+        public string[] ipAddress { get; set; }
         public string[] macAddress { get; set; }
         public CPUInfo cpu { get; set; }
-        public long ram { get; set; }
-        public List<DriveInfo> drives { get; set; }
+        public RAMInfo ram { get; set; }
+        public DiskDrive diskDrive { get; set; }
+        public List<LogicalDisk> logicalDisks { get; set; }
         public List<FirewallProfile> firewalls { get; set; }
     }
 
     public class CPUInfo
     {
-        public string Model { get; set; }
-        public string Manufacturer { get; set; }
-        public int NumberOfCores { get; set; }
-        public int ThreadCount { get; set; }
-        public int MaxClockSpeedMHz { get; set; }
-        public int Architecture { get; set; }
-        public string Caption { get; set; }
+        public string name { get; set; }
+        public int numberOfCores { get; set; }
+        public int threadCount { get; set; }
+        public int maxClockSpeed { get; set; }
+        public float usage { get; set; }
     }
 
-    public class DriveInfo
+    public class RAMInfo
     {
-        public string Disk { get; set; }
-        public string VolumeName { get; set; }
-        public string FileSystem { get; set; }
-        public long Size { get; set; }
-        public long FreeSpace { get; set; }
+        public double total { get; set; }
+        public float available { get; set; }
+    }
+
+    public class DiskDrive
+    {
+        public string model { get; set; }
+        public int size { get; set; }
+    }
+
+    public class LogicalDisk
+    {
+        public string name { get; set; }
+        public string volumeName { get; set; }
+        public float size { get; set; }
+        public float freeSpace { get; set; }
     }
 
     public class FirewallProfile

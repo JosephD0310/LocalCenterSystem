@@ -11,27 +11,38 @@ export class DevicesService {
         private devicesRepo: Repository<Device>,
     ) {}
 
-    findAll() {
-        return this.devicesRepo.find();
+    async findLatestOfAllDevices(): Promise<Device[]> {
+        return this.devicesRepo.query(`
+          SELECT d1.*
+          FROM device d1
+          INNER JOIN (
+            SELECT serialNumber, MAX(updatedAt) AS maxUpdatedAt
+            FROM device
+            GROUP BY serialNumber
+          ) d2 ON d1.serialNumber = d2.serialNumber AND d1.updatedAt = d2.maxUpdatedAt
+        `);
+      }
+
+    async findAllBySerialNumber(serialNumber: string): Promise<Device[]> {
+        return this.devicesRepo.find({
+            where: { serialNumber },
+            order: { updatedAt: 'DESC' }, // Sắp xếp mới nhất trước
+        });
     }
 
-    findOne(uuid: string) {
-        return this.devicesRepo.findOneBy({ uuid });
+    async findLatestBySerialNumber(serialNumber: string): Promise<Device | null> {
+        return this.devicesRepo.findOne({
+            where: { serialNumber },
+            order: { updatedAt: 'DESC' },
+        });
     }
 
-    create(createDeviceDto: CreateDeviceDto) {
+    async create(createDeviceDto: CreateDeviceDto): Promise<Device> {
         const device = this.devicesRepo.create(createDeviceDto);
-        return this.devicesRepo.save(device);
+        return await this.devicesRepo.save(device);
     }
 
-    async update(uuid: string, dto: CreateDeviceDto) {
-        const existing = await this.devicesRepo.findOneBy({ uuid });
-        if (!existing) return null;
-        const updated = this.devicesRepo.merge(existing, dto);
-        return this.devicesRepo.save(updated);
-    }
-
-    delete(deviceId: number) {
-        return this.devicesRepo.delete(deviceId);
+    delete(serialNumber: string) {
+        return this.devicesRepo.delete(serialNumber);
     }
 }

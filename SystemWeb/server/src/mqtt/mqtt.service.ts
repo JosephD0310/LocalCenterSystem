@@ -31,36 +31,28 @@ export class MqttService implements OnModuleInit {
             try {
                 const data = JSON.parse(payload.toString());
                 data.updatedAt = new Date();
-            
+
                 this.eventsGateway.emitMqttData(data);
-            
+
                 const createDeviceDto: CreateDeviceDto = {
-                  uuid: data.uuid,
-                  deviceId: data.deviceId,
-                  room: data.room,
-                  hostname: data.hostname,
-                  ipAddress: data.ipAddress,
-                  macAddress: data.macAddress,
-                  cpu: data.cpu,
-                  ram: data.ram,
-                  drives: data.drives,
-                  firewalls: data.firewalls
+                    serialNumber: data.serialNumber,
+                    deviceId: data.deviceId,
+                    room: data.room,
+                    hostname: data.hostname,
+                    publicIp: data.publicIp,
+                    ipAddress: data.ipAddress,
+                    macAddress: data.macAddress,
+                    cpu: data.cpu,
+                    ram: data.ram,
+                    diskDrive: data.diskDrive,
+                    logicalDisks: data.logicalDisks,
+                    firewalls: data.firewalls,
                 };
-            
-                const existingDevice = await this.devicesService.findOne(data.UUID);
-            
-                if (existingDevice) {
-                  // Cập nhật thiết bị nếu đã tồn tại
-                  await this.devicesService.update(data.UUID, createDeviceDto);
-                  console.log(`Updated device with ID: ${data.deviceId}`);
-                } else {
-                  // Tạo mới nếu chưa có
-                  await this.devicesService.create(createDeviceDto);
-                  console.log(`Created new device with ID: ${data.deviceId}`);
-                }
-              } catch (error) {
+
+                await this.devicesService.create(createDeviceDto);
+            } catch (error) {
                 console.error('Error handling MQTT message:', error);
-              }
+            }
         });
     }
 

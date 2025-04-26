@@ -1,11 +1,11 @@
-import { IsArray, IsDate, IsNumber, IsObject, IsString } from 'class-validator';
+import { IsString, IsArray, IsObject } from 'class-validator';
 
 export class CreateDeviceDto {
   @IsString()
-  uuid: string;
+  serialNumber: string;
 
-  @IsNumber()
-  deviceId: number;
+  @IsString()
+  deviceId: string;
 
   @IsString()
   room: string;
@@ -13,6 +13,9 @@ export class CreateDeviceDto {
   @IsString()
   hostname: string;
 
+  @IsString()
+  publicIp: string;
+  
   @IsArray()
   ipAddress: string[];
 
@@ -20,31 +23,17 @@ export class CreateDeviceDto {
   macAddress: string[];
 
   @IsObject()
-  cpu: {
-    Model: string;
-    Manufacturer: string;
-    NumberOfCores: number;
-    ThreadCount: number;
-    MaxClockSpeedMHz: number;
-    Architecture: number;
-    Caption: string;
-  };
+  cpu: any;
 
-  @IsNumber()
-  ram: number;
+  @IsObject()
+  ram: any;
+
+  @IsObject()
+  diskDrive: any;
 
   @IsArray()
-  drives: {
-    DeviceID: string;
-    VolumeName: string;
-    FileSystem: string;
-    Size: number;
-    FreeSpace: number;
-  }[];
+  logicalDisks: any[];
 
   @IsArray()
-  firewalls: {
-    ProfileName: string;
-    Enabled: boolean;
-  }[]
+  firewalls: any[];
 }
