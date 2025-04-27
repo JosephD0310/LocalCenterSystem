@@ -249,7 +249,7 @@ namespace TerminalService
                 var cpuUsage = new PerformanceCounter("Processor", "% Processor Time", "_Total");
                 cpuUsage.NextValue(); // Bắt buộc gọi 1 lần đầu, giá trị sẽ = 0
                 System.Threading.Thread.Sleep(1000); // Chờ 1s cho giá trị cập nhật
-                cpuInfo.usage = cpuUsage.NextValue();
+                cpuInfo.usage = (int)Math.Ceiling(cpuUsage.NextValue());
                 log.Info("CPU Usage: " + cpuUsage.NextValue() + " %");
 
                 info.cpu = cpuInfo;
@@ -267,7 +267,7 @@ namespace TerminalService
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_ComputerSystem");
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
-                    ramInfo.total = Convert.ToDouble(queryObj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024);
+                    ramInfo.total = (int)Math.Round(Convert.ToDouble(queryObj["TotalPhysicalMemory"]) / (1024 * 1024 * 1024));
                     log.Info("RAM: " + ramInfo.total + "GB");
                 }
 
@@ -292,7 +292,7 @@ namespace TerminalService
                 {
                     diskDrive.model = queryObj["Model"]?.ToString();
                     ulong? sizeBytes = queryObj["Size"] as ulong?;
-                    diskDrive.size = sizeBytes.HasValue ? (int)(sizeBytes.Value / (1024 * 1024 * 1024)) : 0;
+                    diskDrive.size = sizeBytes.HasValue ? (int)Math.Ceiling(sizeBytes.Value / (1024.0 * 1024.0 * 1024.0)) : 0;
 
                     log.Info($"Disk: {diskDrive.model} ({diskDrive.size} GB)");
                 }
@@ -315,14 +315,16 @@ namespace TerminalService
 
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
+                    float size = queryObj["Size"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["Size"]) / (1024 * 1024 * 1024), 1) : 0;
+                    float freeSpace = queryObj["FreeSpace"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["FreeSpace"]) / (1024 * 1024 * 1024), 1) : 0;
+                    info.diskDrive.used += (size - freeSpace);
                     disks.Add(new LogicalDisk
                     {
                         name = queryObj["Name"]?.ToString(),
                         volumeName = queryObj["VolumeName"]?.ToString(),
-                        size = queryObj["Size"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["Size"]) / (1024 * 1024 * 1024), 1) : 0,
-                        freeSpace = queryObj["FreeSpace"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["FreeSpace"]) / (1024 * 1024 * 1024), 1) : 0
+                        size = size,
+                        freeSpace = freeSpace
                     });
-
                     log.Info($"Name: {queryObj["Name"]} {queryObj["VolumeName"]}");
                     log.Info($"Size: {queryObj["Size"]}");
                     log.Info($"FreeSpace: {queryObj["FreeSpace"]}");
@@ -516,7 +518,7 @@ namespace TerminalService
 
     public class RAMInfo
     {
-        public double total { get; set; }
+        public int total { get; set; }
         public float available { get; set; }
     }
 
@@ -524,6 +526,7 @@ namespace TerminalService
     {
         public string model { get; set; }
         public int size { get; set; }
+        public float used { get; set; }
     }
 
     public class LogicalDisk

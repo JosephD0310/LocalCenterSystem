@@ -9,17 +9,37 @@ type CardProps = {
     item: DeviceData;
 };
 
-function DeviceCard({item} : CardProps) {
+function DeviceCard({ item }: CardProps) {
+    const checkDeviceState = (updatedAt : string) => {
+        const currentTime = new Date().getTime();
+        const lastUpdateDate = new Date(updatedAt).getTime();
+        const timeDifference = currentTime - lastUpdateDate;  // Tính chênh lệch thời gian (ms)
+        const tenMinutesInMs = 10 * 60 * 1000; // 10 phút tính theo ms
+    
+        if (timeDifference > tenMinutesInMs) {
+            return 'offline'; 
+        }
+        return 'online'; 
+    }
+
+    const cpuInUse = item.cpu.usage;
+    const ramInUse = ((item.ram.total * 1024 - item.ram.available) / 1024 / item.ram.total) * 100;
+    const diskInUse = (item.diskDrive.used / item.diskDrive.size) * 100;
+
+    let deviceState = (cpuInUse > 90 || ramInUse > 90 || diskInUse > 90) ? 'unhealthy' : 'healthy';
+
+    let finalState = checkDeviceState(item.updatedAt) === 'offline' ? 'offline' : deviceState;
+
     return (
         <div className="bg-white w-[300px] rounded-2xl shadow-xs px-7 py-5">
             <div className="flex flex-col gap-5">
                 <div className="flex flex-row gap-5 items-center">
-                    <FontAwesomeIcon icon={faDesktop} className="text-4xl bg-[#78BF18] p-4 rounded-2xl" color='#fff'/>
+                    <FontAwesomeIcon icon={faDesktop} className="text-4xl bg-[#78BF18] p-4 rounded-2xl" color="#fff" />
                     <div className="w-full">
                         <h3 className="text-2xl font-bold mb-2">{item.hostname}</h3>
                         <div className="w-full flex flex-row justify-between items-center">
                             <p className="text-xl text-gray-600">{item.ipAddress[0]}</p>
-                            <Status content="healthy" />
+                            <Status content={finalState} />
                         </div>
                     </div>
                 </div>
@@ -27,28 +47,35 @@ function DeviceCard({item} : CardProps) {
                     <div>
                         <div className="flex flex-row justify-between">
                             <p>CPU</p>
-                            <p>50%</p>
+                            <p>{cpuInUse}%</p>
                         </div>
-                        <ProgressBar value={50} />
+                        <ProgressBar value={cpuInUse} />
                     </div>
                     <div>
                         <div className="flex flex-row justify-between">
-                            <p>Memory ・ 6GB / 8GB</p>
-                            <p>{Math.floor((6 / 8) * 100)}%</p>
+                            <p>
+                                Memory ・ {((item.ram.total * 1024 - item.ram.available) / 1024).toFixed(1)}GB /{' '}
+                                {item.ram.total}GB
+                            </p>
+                            <p>{Math.floor(ramInUse)}%</p>
                         </div>
-                        <ProgressBar value={(6 / 8) * 100} />
+                        <ProgressBar value={ramInUse} />
                     </div>
                     <div>
                         <div className="flex flex-row justify-between">
-                            <p>Disk ・ 101GB / 256GB</p>
-                            <p>{Math.floor((101 / 256) * 100)}%</p>
+                            <p>
+                                Disk ・ {item.diskDrive.used}GB / {item.diskDrive.size}GB
+                            </p>
+                            <p>{Math.floor(diskInUse)}%</p>
                         </div>
-                        <ProgressBar value={(101 / 256) * 100} />
+                        <ProgressBar value={diskInUse} />
                     </div>
                 </div>
                 <div>
-                    <p className="text-2xl text-gray-600">Location: {item.room}</p>
-                    <p className="text-2xl text-gray-600">Last updated: {dayjs(item.updatedAt).format('DD/MM/YYYY HH:mm')}</p>
+                    <p className="text-2xl text-gray-600">Location: {item.room} ・ Number: {item.deviceId}</p>
+                    <p className="text-2xl text-gray-600">
+                        Last updated: {dayjs(item.updatedAt).format('DD/MM/YYYY HH:mm')}
+                    </p>
                 </div>
             </div>
         </div>

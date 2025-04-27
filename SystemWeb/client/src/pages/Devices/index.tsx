@@ -6,7 +6,7 @@ import { DeviceData } from '../../types/devicedata';
 
 function Devices() {
     const socketData = useSocket();
-    const { data: initialData, loading } = useFetch<DeviceData[]>('http://localhost:3000/devices');
+    const { data: initialData, loading } = useFetch<DeviceData[]>('http://localhost:3000/devices/latest-all');
 
     const [devices, setDevices] = useState<DeviceData[]>([]);
 

@@ -2,7 +2,7 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type StatusProps = {
-    content: 'healthy' | 'unhealthy' | 'offline';
+    content: string;
 };
 
 function Status({ content }: StatusProps) {
