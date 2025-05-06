@@ -36,4 +36,7 @@ export class CreateDeviceDto {
 
   @IsArray()
   firewalls: any[];
+
+  @IsString()
+  status: string;
 }

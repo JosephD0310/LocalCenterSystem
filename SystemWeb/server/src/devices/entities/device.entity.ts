@@ -43,4 +43,7 @@ export class Device {
   
     @CreateDateColumn({ type: 'timestamp' })
     updatedAt: Date;
+
+    @Column({ type: 'varchar', length: 50, nullable: true })
+    status: string;
   }

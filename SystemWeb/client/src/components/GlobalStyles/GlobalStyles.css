@@ -6,6 +6,24 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 5px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #85CC16; 
+  border-radius: 6px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #78B814; 
+}
+
+::-webkit-scrollbar-track {
+  background-color: #E5E7EB;
+  border-radius: 6px; 
+}
+
 html {
   font-size: 62.5%;
 }

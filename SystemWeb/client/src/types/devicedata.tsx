@@ -1,7 +1,7 @@
 export type DeviceData = {
     id: number;
     serialNumber: string;
-    deviceId: string;
+    deviceId: number;
     room: string;
     hostname: string;
     publicIp: string;
@@ -13,4 +13,5 @@ export type DeviceData = {
     logicalDisks: any[];         
     firewalls: any[];            
     updatedAt: string;            
+    status: string;            
   };

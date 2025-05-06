@@ -11,7 +11,7 @@ export class DevicesController {
         return this.devicesService.findLatestOfAllDevices();
     }
 
-    @Get('history/:serialNumber')
+    @Get('usage-logs/:serialNumber')
     getHistory(@Param('serialNumber') serialNumber: string) {
         return this.devicesService.findAllBySerialNumber(serialNumber);
     }

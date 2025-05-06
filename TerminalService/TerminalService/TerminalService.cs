@@ -132,11 +132,12 @@ namespace TerminalService
             // Get Serial Number of Mainboard
             try
             {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BIOS");
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    info.serialNumber = obj["SerialNumber"].ToString();
+                    info.serialNumber = obj["SerialNumber"]?.ToString().Trim();
                     log.Info("Serial Number: " + obj["SerialNumber"]);
+                    break;
                 }
             }
             catch (ManagementException e)
@@ -317,7 +318,7 @@ namespace TerminalService
                 {
                     float size = queryObj["Size"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["Size"]) / (1024 * 1024 * 1024), 1) : 0;
                     float freeSpace = queryObj["FreeSpace"] != null ? (float)Math.Round(Convert.ToDouble(queryObj["FreeSpace"]) / (1024 * 1024 * 1024), 1) : 0;
-                    info.diskDrive.used += (size - freeSpace);
+                    info.diskDrive.used += Math.Round((size - freeSpace), 1);
                     disks.Add(new LogicalDisk
                     {
                         name = queryObj["Name"]?.ToString(),
@@ -366,6 +367,15 @@ namespace TerminalService
             {
                 log.Error("Error query Firewall: " + e.Message);
             }
+
+            // Status
+            double cpuInUse = info.cpu.usage;
+            double ramInUse = ((info.ram.total * 1024.0 - info.ram.available) / 1024.0 / info.ram.total) * 100.0;
+            double diskInUse = (info.diskDrive.used / info.diskDrive.size) * 100.0;
+
+            info.status = (cpuInUse > 90 || ramInUse > 90 || diskInUse > 90) ? "unhealthy" : "healthy";
+
+            log.Info($"Status: {info.status}");
 
             return info;
         }
@@ -505,6 +515,8 @@ namespace TerminalService
         public DiskDrive diskDrive { get; set; }
         public List<LogicalDisk> logicalDisks { get; set; }
         public List<FirewallProfile> firewalls { get; set; }
+
+        public string status { get; set; }
     }
 
     public class CPUInfo
@@ -526,7 +538,7 @@ namespace TerminalService
     {
         public string model { get; set; }
         public int size { get; set; }
-        public float used { get; set; }
+        public double used { get; set; }
     }
 
     public class LogicalDisk

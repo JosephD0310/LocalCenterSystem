@@ -47,6 +47,7 @@ export class MqttService implements OnModuleInit {
                     diskDrive: data.diskDrive,
                     logicalDisks: data.logicalDisks,
                     firewalls: data.firewalls,
+                    status: data.status
                 };
 
                 await this.devicesService.create(createDeviceDto);
