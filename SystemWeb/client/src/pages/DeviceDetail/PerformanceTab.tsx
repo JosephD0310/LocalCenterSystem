@@ -1,23 +1,26 @@
-import { DoughnutChart } from "../../components/Chart/DoughnutChart";
-import ProgressBar from "../../components/ProgressBar";
-import { DeviceData } from "../../types/devicedata";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DoughnutChart } from '../../components/Chart/DoughnutChart';
+import ProgressBar from '../../components/ProgressBar';
+import { DeviceData } from '../../types/devicedata';
+import { faCompactDisc, faMemory, faMicrochip } from '@fortawesome/free-solid-svg-icons';
 
 type PerformanceProps = {
-    item: DeviceData
-}
+    item: DeviceData;
+};
 
-function PerformanceTab({item} : PerformanceProps) {
-
+function PerformanceTab({ item }: PerformanceProps) {
     const cpuInUse = item.cpu.usage;
     const ramInUse = ((item.ram.total * 1024 - item.ram.available) / 1024 / item.ram.total) * 100;
     const diskInUse = (item.diskDrive.used / item.diskDrive.size) * 100;
-    
+
     return (
         <div className="flex flex-row gap-5">
             <div className="w-full bg-white rounded-2xl shadow-xs px-7 py-5">
                 <div>
                     <div className="pb-5 border-b border-gray-400">
-                        <h2 className="text-4xl font-bold">CPU</h2>
+                        <h2 className="text-4xl font-bold">
+                            <FontAwesomeIcon icon={faMicrochip} /> CPU
+                        </h2>
                         <h2 className="text-2xl text-gray-600">{item.cpu.name}</h2>
                     </div>
                     <div className="flex flex-row justify-between items-center p-10">
@@ -44,7 +47,7 @@ function PerformanceTab({item} : PerformanceProps) {
             <div className="w-full bg-white rounded-2xl shadow-xs px-7 py-5">
                 <div>
                     <div className="pb-5 border-b border-gray-400">
-                        <h2 className="text-4xl font-bold">Memory</h2>
+                        <h2 className="text-4xl font-bold"><FontAwesomeIcon icon={faMemory} /> Memory</h2>
                         <h2 className="text-2xl text-gray-600">RAM ・ {item.ram.total}GB</h2>
                     </div>
                     <div className="flex flex-row justify-between items-center p-10">
@@ -67,7 +70,7 @@ function PerformanceTab({item} : PerformanceProps) {
             <div className="w-full bg-white rounded-2xl shadow-xs px-7 py-5">
                 <div>
                     <div className="pb-5 border-b border-gray-400">
-                        <h2 className="text-4xl font-bold">Disk</h2>
+                        <h2 className="text-4xl font-bold"><FontAwesomeIcon icon={faCompactDisc} /> Disk</h2>
                         <h2 className="text-2xl text-gray-600">{item.diskDrive.model}</h2>
                     </div>
                     <div className="flex flex-row justify-between items-center p-10 gap-5">

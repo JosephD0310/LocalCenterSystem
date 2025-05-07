@@ -241,19 +241,18 @@ namespace TerminalService
                     cpuInfo.numberOfCores = Convert.ToInt32(queryObj["NumberOfCores"]);
                     cpuInfo.threadCount = Convert.ToInt32(queryObj["ThreadCount"]);
                     cpuInfo.maxClockSpeed = Convert.ToInt32(queryObj["MaxClockSpeed"]);
-                    log.Info($"CPU: {queryObj["Name"]}");
-                    log.Info($"NumberOfCores: {queryObj["NumberOfCores"]}");
-                    log.Info($"ThreadCount: {queryObj["ThreadCount"]}");
-                    log.Info($"MaxClockSpeed: {queryObj["MaxClockSpeed"]} MHz");
                 }
 
                 var cpuUsage = new PerformanceCounter("Processor", "% Processor Time", "_Total");
                 cpuUsage.NextValue(); // Bắt buộc gọi 1 lần đầu, giá trị sẽ = 0
                 System.Threading.Thread.Sleep(1000); // Chờ 1s cho giá trị cập nhật
                 cpuInfo.usage = (int)Math.Ceiling(cpuUsage.NextValue());
-                log.Info("CPU Usage: " + cpuUsage.NextValue() + " %");
-
                 info.cpu = cpuInfo;
+                log.Info($"CPU: {info.cpu.name}");
+                log.Info($"NumberOfCores: {info.cpu.numberOfCores}");
+                log.Info($"ThreadCount: {info.cpu.threadCount}");
+                log.Info($"MaxClockSpeed: {info.cpu.maxClockSpeed} MHz");
+                log.Info("CPU Usage: " + info.cpu.usage + " %");
                 log.Info("-------------------------------------");
             }
             catch (ManagementException e)
@@ -424,7 +423,7 @@ namespace TerminalService
 
                 case "GetProcesses":
                     log.Info("Retrieving process list...");
-                    await RunPowerShellCommand("Get-Process | Select-Object Name, Id");
+                    await RunPowerShellCommand("Get-Process | Where-Object { $_.MainWindowTitle -ne \"\" } | Select-Object Name, Id, MainWindowTitle");
                     break;
 
                 case "KillProcess":

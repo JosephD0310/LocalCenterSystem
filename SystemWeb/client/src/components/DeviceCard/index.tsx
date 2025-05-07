@@ -30,7 +30,7 @@ function DeviceCard({ item }: CardProps) {
 
     let deviceState = item.status
 
-    let finalState = checkDeviceState(item.updatedAt) === 'offline' ? 'offline' : deviceState;
+    item.status = checkDeviceState(item.updatedAt) === 'offline' ? 'offline' : deviceState;
 
     return (
         <Link key={item.serialNumber} to={config.routes.generateDeviceDetail(item.deviceId)} state={item}>
@@ -46,7 +46,7 @@ function DeviceCard({ item }: CardProps) {
                             <h3 className="text-2xl font-bold mb-2">{item.hostname}</h3>
                             <div className="w-full flex flex-row justify-between items-center">
                                 <p className="text-xl text-gray-600">{item.ipAddress[0]}</p>
-                                <Status content={finalState} />
+                                <Status content={item.status} />
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ function DeviceCard({ item }: CardProps) {
                         <div>
                             <div className="flex flex-row justify-between">
                                 <p>
-                                    Disk ・ {item.diskDrive.used}GB / {item.diskDrive.size}GB
+                                    Disk ・ {(item.diskDrive.used).toFixed(1)}GB / {item.diskDrive.size}GB
                                 </p>
                                 <p>{Math.floor(diskInUse)}%</p>
                             </div>

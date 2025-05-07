@@ -1,21 +1,28 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type StatusProps = {
     content: string;
+    option?: 'icon' | 'bg'; 
 };
 
-function Status({ content }: StatusProps) {
+function Status({ content, option = 'icon' }: StatusProps) {
+    const upperContent = content.toUpperCase();
+
+    const bgColor =
+        content === 'healthy'
+            ? 'bg-[#DCFCE7] text-green-700'
+            : content === 'unhealthy'
+            ? 'bg-[#FEF3C7] text-yellow-700'
+            : 'bg-[#F3F4F6] text-gray-600';
+
+    const iconColor = content === 'healthy' ? '#1ED760' : content === 'unhealthy' ? '#F7CA4C' : '#D4DBE6';
 
     return (
-        <div className="flex flex-row items-center gap-2">
-            {content == "healthy" && <FontAwesomeIcon icon={faCircle} className="text-sm" color="#1ED760"/>}
-            {content == "unhealthy" && <FontAwesomeIcon icon={faCircle} className="text-sm" color="#F7CA4C"/>}
-            {content == "offline" && <FontAwesomeIcon icon={faCircle} className="text-sm" color="#D4DBE6"/>}
-            <div
-                className={`flex flex-row justify-center rounded-full text-xl font-bold text-gray-700`}
-            >
-                {content.toUpperCase()}
+        <div className={`flex items-center`}>
+            {option === 'icon' && <FontAwesomeIcon icon={faCircle} className="text-sm" color={iconColor} />}
+            <div className={`rounded-full text-xl font-bold px-3 py-1 text-gray-700 ${option === 'bg' ? bgColor : ''}`}>
+                {upperContent}
             </div>
         </div>
     );

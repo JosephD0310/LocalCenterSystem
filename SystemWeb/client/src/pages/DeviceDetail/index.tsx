@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import useSocket from '../../services/hooks/useSocket';
 import PerformanceTab from './PerformanceTab';
 import UsageLogsTab from './UsageLogsTab';
+import Status from '../../components/Status';
+import ControlTab from './ControlTab';
 
 function DeviceDetail() {
     const location = useLocation();
@@ -30,6 +32,7 @@ function DeviceDetail() {
                 </Link>
                 <FontAwesomeIcon icon={faChevronRight} />
                 <h2 className="font-bold text-4xl">{device.hostname}</h2>
+                <Status content={device.status} />
             </div>
             <div className="mx-10 mt-10 bg-white rounded-2xl shadow-xs p-10">
                 <div className="flex ">
@@ -65,7 +68,7 @@ function DeviceDetail() {
                             <PerformanceTab item={device}/>
                         </TabItem>
                         <TabItem label="Control">
-                            <div>Control</div>
+                            <ControlTab/>
                         </TabItem>
                         <TabItem label="Usage Logs">
                             <UsageLogsTab serialNumber={device.serialNumber} />

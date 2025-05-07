@@ -18,7 +18,7 @@ function UsageLogsTab({ serialNumber }: UsageLogsProps) {
 
     useEffect(() => {
         if (data) {
-            const latest30 = data.slice(-30);
+            const latest30 = data.slice(0, 30);
             setLogs(latest30);
         }
     }, [data]);
@@ -66,7 +66,7 @@ function UsageLogsTab({ serialNumber }: UsageLogsProps) {
                                           {diskInUse.toFixed(1)} / {log.diskDrive.size}
                                       </td>
                                       <td className="px-4 py-4">
-                                          <Status content={log.status} />
+                                          <Status option='bg' content={log.status} />
                                       </td>
                                   </tr>
                               );
