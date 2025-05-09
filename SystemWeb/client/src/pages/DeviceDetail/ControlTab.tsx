@@ -7,12 +7,13 @@ import Restart from './ControlFeatures/Restart';
 import GetProcesses from './ControlFeatures/GetProcesses';
 import Firewall from './ControlFeatures/Firewall';
 import useSocket from '../../services/hooks/useSocket';
+import { DeviceData } from '../../types/devicedata';
 
 type ControlTabProps = {
-    serialNumber: string;
+    device: DeviceData;
 };
 
-function ControlTab({ serialNumber }: ControlTabProps) {
+function ControlTab({ device }: ControlTabProps) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const { controlReq } = useSocket();
@@ -20,7 +21,7 @@ function ControlTab({ serialNumber }: ControlTabProps) {
     const handleGetProcesses = () => {
         setActiveIndex(3);
         const payload = {
-            serialNumber: serialNumber,
+            serialNumber: device.serialNumber,
             control: {
                 action: 'GetProcesses',
             },
@@ -93,10 +94,10 @@ function ControlTab({ serialNumber }: ControlTabProps) {
                         <Restart />
                     </TabPanel>
                     <TabPanel>
-                        <GetProcesses serialNumber={serialNumber} />
+                        <GetProcesses serialNumber={device.serialNumber} />
                     </TabPanel>
                     <TabPanel className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
-                        <Firewall />
+                        <Firewall item={device} />
                     </TabPanel>
                 </TabPanels>
             )}

@@ -24,7 +24,7 @@ function useSocket() {
         };
     }, []);
 
-    const controlReq = (payload: { serialNumber: string; control: { action: string; param?: string } }) => {
+    const controlReq = (payload: { serialNumber: string; control: { action: string; param?: any } }) => {
         socket.emit('mqtt-control', payload);
     };
 

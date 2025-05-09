@@ -68,7 +68,7 @@ function DeviceDetail() {
                             <PerformanceTab item={device}/>
                         </TabItem>
                         <TabItem label="Control">
-                            <ControlTab serialNumber={device.serialNumber}/>
+                            <ControlTab device={device}/>
                         </TabItem>
                         <TabItem label="Usage Logs">
                             <UsageLogsTab serialNumber={device.serialNumber} />

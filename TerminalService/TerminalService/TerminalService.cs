@@ -455,14 +455,34 @@ namespace TerminalService
                     }
                     break;
 
-                case "EnableFirewall":
-                    log.Info("Enabling firewall...");
-                    await RunPowerShellCommand("Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True");
+                case "SettingDomain":
+                    log.Info($"Domain is setting to {command.param}");
+                    await RunPowerShellCommand($"Set-NetFirewallProfile -Profile Domain -Enabled {command.param}");
+                    var domain_info = RunPowerShellCommand("(Get-NetFirewallProfile -Profile Domain).Enabled").Result;
+                    if (!string.IsNullOrEmpty(domain_info))
+                    {
+                        await PublishResultToServer(serialNumber, "SettingDomain", domain_info);
+                    }
                     break;
 
-                case "DisableFirewall":
-                    log.Info("Disabling firewall...");
-                    await RunPowerShellCommand("Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False");
+                case "SettingPrivate":
+                    log.Info($"Domain is setting to {command.param}");
+                    await RunPowerShellCommand($"Set-NetFirewallProfile -Profile Private -Enabled {command.param}");
+                    var private_info = RunPowerShellCommand("(Get-NetFirewallProfile -Profile Private).Enabled").Result;
+                    if (!string.IsNullOrEmpty(private_info))
+                    {
+                        await PublishResultToServer(serialNumber, "SettingPrivate", private_info);
+                    }
+                    break;
+
+                case "SettingPublic":
+                    log.Info($"Domain is setting to {command.param}");
+                    await RunPowerShellCommand($"Set-NetFirewallProfile -Profile Public -Enabled {command.param}");
+                    var public_info = RunPowerShellCommand("(Get-NetFirewallProfile -Profile Public).Enabled").Result;
+                    if (!string.IsNullOrEmpty(public_info))
+                    {
+                        await PublishResultToServer(serialNumber, "SettingPublic", public_info);
+                    }
                     break;
 
                 default:
