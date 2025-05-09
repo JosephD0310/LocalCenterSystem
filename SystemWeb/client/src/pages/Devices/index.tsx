@@ -5,7 +5,7 @@ import useSocket from '../../services/hooks/useSocket';
 import { DeviceData } from '../../types/devicedata';
 
 function Devices() {
-    const socketData = useSocket();
+    const {data: mqttData} = useSocket();
     const { data: initialData, loading } = useFetch<DeviceData[]>('http://localhost:3000/devices/latest-all');
 
     const [devices, setDevices] = useState<DeviceData[]>([]);
@@ -19,22 +19,22 @@ function Devices() {
 
     // Khi nhận dữ liệu realtime từ socket
     useEffect(() => {
-        if (socketData) {
+        if (mqttData) {
             setDevices(prevDevices => {
-                const index = prevDevices.findIndex(d => d.serialNumber === socketData.serialNumber);
+                const index = prevDevices.findIndex(d => d.serialNumber === mqttData.serialNumber);
 
                 if (index !== -1) {
                     // Đã tồn tại -> cập nhật thông tin
                     const updated = [...prevDevices];
-                    updated[index] = socketData;
+                    updated[index] = mqttData;
                     return updated;
                 } else {
                     // Thiết bị mới -> thêm vào danh sách
-                    return [...prevDevices, socketData];
+                    return [...prevDevices, mqttData];
                 }
             });
         }
-    }, [socketData]);
+    }, [mqttData]);
 
     return (
         <div className="p-10">

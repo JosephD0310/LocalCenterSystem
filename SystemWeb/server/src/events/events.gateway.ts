@@ -1,14 +1,33 @@
-import { Injectable } from '@nestjs/common';
-import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import { response } from 'express';
 import { Server } from 'socket.io';
+import { MqttService } from 'src/mqtt/mqtt.service';
 
 @WebSocketGateway({ cors: true })
 @Injectable()
 export class EventsGateway {
-  @WebSocketServer()
-  server: Server;
+    constructor(@Inject(forwardRef(() => MqttService)) private readonly mqttService: MqttService) {}
 
-  emitMqttData(data: any) {
-    this.server.emit('mqtt-data', data);
-  }
+    @WebSocketServer()
+    server: Server;
+
+    emitMqttData(data: any) {
+        this.server.emit('mqtt-data', data);
+    }
+
+    emitDeviceResponse(serial: string, res: any) {
+        const message = {
+            serial: serial,
+            response: res,
+        };
+        this.server.emit('mqtt-response', message);
+    }
+
+    @SubscribeMessage('mqtt-control')
+    handleControlReq(@MessageBody() payload: any) {
+        console.log('Received command from frontend:', payload);
+
+        this.mqttService.publishToDevice(payload.serialNumber, JSON.stringify(payload.control));
+    }
 }

@@ -28,6 +28,7 @@ namespace TerminalService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(TerminalService));
         private int eventId = 1;
+        private string serialNumber;
         private System.Timers.Timer timer;
         private int pollingInterval;
         private System.Timers.Timer reconnectTimer;
@@ -120,6 +121,22 @@ namespace TerminalService
             }
         }
 
+        private void GetSerialNumber()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BIOS");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    serialNumber = obj["SerialNumber"]?.ToString().Trim();
+                    break;
+                }
+            }
+            catch (ManagementException e)
+            {
+                log.Error("Error querying serial number: " + e.Message);
+            }
+        }
         private SystemInfo GetSystemInfo()
         {
             ConfigurationManager.RefreshSection("appSettings");
@@ -130,20 +147,8 @@ namespace TerminalService
             info.room = ConfigurationManager.AppSettings["Room"];
 
             // Get Serial Number of Mainboard
-            try
-            {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BIOS");
-                foreach (ManagementObject obj in searcher.Get())
-                {
-                    info.serialNumber = obj["SerialNumber"]?.ToString().Trim();
-                    log.Info("Serial Number: " + obj["SerialNumber"]);
-                    break;
-                }
-            }
-            catch (ManagementException e)
-            {
-                log.Error("Error querying serial number: " + e.Message);
-            }
+            info.serialNumber = serialNumber;
+            log.Info("Serial Number: " + serialNumber);
 
             // Get Device BasicInfo
             try
@@ -383,7 +388,10 @@ namespace TerminalService
         {
             if (mqttClient == null) return;
 
-            await mqttClient.SubscribeAsync(ConfigurationManager.AppSettings["MqttSubTopic"]);
+            GetSerialNumber();
+            string topic = $"control/{serialNumber}";
+            await mqttClient.SubscribeAsync(topic);
+            log.Info($"Subscribed to topic: {topic}");
 
             mqttClient.ApplicationMessageReceivedAsync += async e =>
             {
@@ -404,12 +412,11 @@ namespace TerminalService
                 }
             };
 
-            log.Info("Subscribed to command topic.");
         }
 
         private async Task ExecuteCommand(CommandMessage command)
         {
-            switch (command.Action)
+            switch (command.action)
             {
                 case "Shutdown":
                     log.Info("Shutting down system...");
@@ -423,14 +430,24 @@ namespace TerminalService
 
                 case "GetProcesses":
                     log.Info("Retrieving process list...");
-                    await RunPowerShellCommand("Get-Process | Where-Object { $_.MainWindowTitle -ne \"\" } | Select-Object Name, Id, MainWindowTitle");
+                    var processOutput = RunPowerShellCommand("tasklist /fi 'SESSIONNAME eq Console' /fi 'USERNAME ne SYSTEM' /fo csv | ConvertFrom-Csv | Select-Object 'Image Name', 'PID', 'Mem Usage' | ConvertTo-Json").Result;
+                    if (!string.IsNullOrEmpty(processOutput))
+                    {
+                        await PublishResultToServer(serialNumber, "GetProcesses", processOutput);
+                    }
                     break;
 
                 case "KillProcess":
-                    if (!string.IsNullOrEmpty(command.Params))
+                    if (!string.IsNullOrEmpty(command.param))
                     {
-                        log.Info($"Killing process: {command.Params}");
-                        await RunPowerShellCommand($"Stop-Process -Name {command.Params} -Force");
+                        log.Info($"Killing process: {command.param}");
+                        await RunPowerShellCommand($"Stop-Process -Name {command.param} -Force");
+                        log.Info("Retrieving process list...");
+                        var result = RunPowerShellCommand("tasklist /fi 'SESSIONNAME eq Console' /fi 'USERNAME ne SYSTEM' /fo csv | ConvertFrom-Csv | Select-Object 'Image Name', 'PID', 'Mem Usage' | ConvertTo-Json").Result;
+                        if (!string.IsNullOrEmpty(result))
+                        {
+                            await PublishResultToServer(serialNumber, "GetProcesses", result);
+                        }
                     }
                     else
                     {
@@ -449,7 +466,7 @@ namespace TerminalService
                     break;
 
                 default:
-                    log.Warn($"Unknown command: {command.Action}");
+                    log.Warn($"Unknown command: {command.action}");
                     break;
             }
         }
@@ -475,13 +492,15 @@ namespace TerminalService
                     if (!string.IsNullOrEmpty(output))
                     {
                         log.Info($"PowerShell Output: {output}");
+                        return output;
                     }
                     if (!string.IsNullOrEmpty(error))
                     {
                         log.Error($"PowerShell Error: {error}");
                     }
 
-                    return output;
+                    return null;
+
                 }
             }
             catch (Exception ex)
@@ -491,13 +510,54 @@ namespace TerminalService
             }
         }
 
+        private async Task PublishResultToServer(string serialNumber, string action, string resultData)
+        {
+            mqttClient.DisconnectedAsync += async e =>
+            {
+                log.Warn("MQTT disconnected. Will try to reconnect...");
+                await ConnectMqttAsync();
+            };
+
+            var resultObj = new CommandResult
+            {
+                action = action,
+                result = resultData
+            };
+
+            string result = JsonConvert.SerializeObject(resultObj);
+
+
+            if (mqttClient != null && mqttClient.IsConnected)
+            {
+                string topic = $"response/{serialNumber}";
+                var message = new MqttApplicationMessageBuilder()
+                    .WithTopic(topic)
+                    .WithPayload(result)
+                    .Build();
+
+                await mqttClient.PublishAsync(message, CancellationToken.None);
+                log.Info("Published command result to server.");
+            }
+        }
     }
 
 
     class CommandMessage
     {
-        public string Action { get; set; }
-        public string Params { get; set; }
+        public string action { get; set; }
+        public string param { get; set; }
+    }
+
+    class CommandResult
+    {
+        public string action { get; set; }
+        public string result { get; set; }
+    }
+
+    class ProcessInfo
+    {
+        public string Name { get; set; }
+        public string MainWindowTitle { get; set; }
     }
 
     class SystemInfo

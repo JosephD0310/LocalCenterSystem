@@ -6,9 +6,27 @@ import Shutdown from './ControlFeatures/Shutdown';
 import Restart from './ControlFeatures/Restart';
 import GetProcesses from './ControlFeatures/GetProcesses';
 import Firewall from './ControlFeatures/Firewall';
+import useSocket from '../../services/hooks/useSocket';
 
-function ControlTab() {
+type ControlTabProps = {
+    serialNumber: string;
+};
+
+function ControlTab({ serialNumber }: ControlTabProps) {
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const { controlReq } = useSocket();
+
+    const handleGetProcesses = () => {
+        setActiveIndex(3);
+        const payload = {
+            serialNumber: serialNumber,
+            control: {
+                action: 'GetProcesses',
+            },
+        };
+        controlReq(payload);
+    };
 
     return (
         <TabGroup className="flex flex-col gap-10">
@@ -45,7 +63,7 @@ function ControlTab() {
                             ? 'bg-[#FFCA22] text-white font-semibold'
                             : 'text-[#FFCA22] bg-white hover:bg-gray-50 font-semibold'
                     }`}
-                    onClick={() => setActiveIndex(3)}
+                    onClick={handleGetProcesses}
                 >
                     <div className="flex flex-row gap-5 items-center">
                         <FontAwesomeIcon icon={faTasks} className="text-4xl" />
@@ -67,17 +85,17 @@ function ControlTab() {
                 </Tab>
             </TabList>
             {activeIndex !== 0 && (
-                <TabPanels className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
-                    <TabPanel>
+                <TabPanels >
+                    <TabPanel className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
                         <Shutdown />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
                         <Restart />
                     </TabPanel>
                     <TabPanel>
-                        <GetProcesses />
+                        <GetProcesses serialNumber={serialNumber} />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
                         <Firewall />
                     </TabPanel>
                 </TabPanels>

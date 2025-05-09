@@ -14,7 +14,7 @@ function UsageLogsTab({ serialNumber }: UsageLogsProps) {
     const { data, loading } = useFetch<DeviceData[]>(`http://localhost:3000/devices/usage-logs/${serialNumber}`);
 
     const [logs, setLogs] = useState<DeviceData[]>([]);
-    const socketData = useSocket();
+    const {data: mqttData} = useSocket();
 
     useEffect(() => {
         if (data) {
@@ -24,13 +24,13 @@ function UsageLogsTab({ serialNumber }: UsageLogsProps) {
     }, [data]);
 
     useEffect(() => {
-        if (socketData && socketData.serialNumber === serialNumber) {
+        if (mqttData && mqttData.serialNumber === serialNumber) {
             setLogs((prevLogs) => {
-                const updatedLogs = [socketData, ...prevLogs];
+                const updatedLogs = [mqttData, ...prevLogs];
                 return updatedLogs.slice(0, 30);
             });
         }
-    }, [socketData]);
+    }, [mqttData]);
 
     return (
         <div className="overflow-auto shadow rounded-lg max-h-[250px]">

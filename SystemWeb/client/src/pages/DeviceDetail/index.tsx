@@ -16,13 +16,13 @@ function DeviceDetail() {
     const item = location.state as DeviceData;
     const [device, setDevice] = useState<DeviceData>(item);
 
-    const socketData = useSocket();
+    const {data} = useSocket();
 
     useEffect(() => {
-        if (socketData && socketData.serialNumber === device.serialNumber) {
-            setDevice(socketData);
+        if (data && data.serialNumber === device.serialNumber) {
+            setDevice(data);
         }
-    }, [socketData]);
+    }, [data]);
 
     return (
         <div className="p-10">
@@ -68,7 +68,7 @@ function DeviceDetail() {
                             <PerformanceTab item={device}/>
                         </TabItem>
                         <TabItem label="Control">
-                            <ControlTab/>
+                            <ControlTab serialNumber={device.serialNumber}/>
                         </TabItem>
                         <TabItem label="Usage Logs">
                             <UsageLogsTab serialNumber={device.serialNumber} />

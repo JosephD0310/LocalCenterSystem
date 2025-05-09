@@ -5,6 +5,7 @@ const socket = io('http://localhost:3000'); // địa chỉ backend
 
 function useSocket() {
     const [data, setData] = useState<any>(null);
+    const [response, setResponse] = useState<any>(null);
 
     useEffect(() => {
         socket.on('mqtt-data', (mqttData) => {
@@ -12,12 +13,22 @@ function useSocket() {
             setData(mqttData);
         });
 
+        socket.on('mqtt-response', (controlRes) => {
+            console.log(controlRes);
+            setResponse(controlRes);
+        });
+
         return () => {
             socket.off('mqtt-data');
+            socket.off('mqtt-response');
         };
     }, []);
 
-    return data;
+    const controlReq = (payload: { serialNumber: string; control: { action: string; param?: string } }) => {
+        socket.emit('mqtt-control', payload);
+    };
+
+    return { data, response, controlReq };
 }
 
 export default useSocket;

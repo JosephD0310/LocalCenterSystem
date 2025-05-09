@@ -15,3 +15,4 @@ export type DeviceData = {
     updatedAt: string;            
     status: string;            
   };
+
