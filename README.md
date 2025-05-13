@@ -26,4 +26,4 @@ Gồm 2 thành phần chính:
 ### Hướng dẫn cài đặt
 
 1. Cài đặt TerminalService (Cài đặt 1 lần duy nhất)
-[Video hướng dẫn]([https://www.youtube.com/](https://youtu.be/2J0xSpe8LOk))
+- [Video hướng dẫn](https://youtu.be/2J0xSpe8LOk)
