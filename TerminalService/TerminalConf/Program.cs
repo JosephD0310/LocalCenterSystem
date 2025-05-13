@@ -36,9 +36,9 @@ class Program
         try
         {
             // Đường dẫn đến file config TerminalService.exe.config
-            string configPath = Path.GetFullPath(
-                @"..\..\..\TerminalService\bin\Debug\TerminalService.exe.config"
-            );
+            string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string exeDirectory = System.IO.Path.GetDirectoryName(exePath);
+            string configPath = System.IO.Path.Combine(exeDirectory, "TerminalService.exe.config");
 
             if (!File.Exists(configPath))
             {

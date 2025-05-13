@@ -49,9 +49,10 @@ namespace TerminalService
                 log.Warn("MQTT disconnected. Will try to reconnect...");
                 await ConnectMqttAsync();
             };
-
+            log.Info(mqttClient.IsConnected);
             if (mqttClient != null && mqttClient.IsConnected)
             {
+                log.Info(mqttClient.IsConnected);
                 var systemInfo = GetSystemInfo();
                 var payload = Newtonsoft.Json.JsonConvert.SerializeObject(systemInfo);
 
@@ -86,8 +87,22 @@ namespace TerminalService
 
         private async Task ConnectMqttAsync()
         {
-            var mqttFactory = new MqttFactory();
-            mqttClient = mqttFactory.CreateMqttClient();
+            if (mqttClient == null)
+            {
+                var mqttFactory = new MqttFactory();
+                mqttClient = mqttFactory.CreateMqttClient();
+
+                mqttClient.DisconnectedAsync += async e =>
+                {
+                    log.Warn("MQTT disconnected. Attempting to reconnect...");
+
+                    // Dừng timer nếu đang chạy
+                    reconnectTimer?.Stop();
+
+                    await Task.Delay(2000); // đợi chút trước khi reconnect
+                    await ConnectMqttAsync();
+                };
+            }
 
             var mqttClientOptions = new MqttClientOptionsBuilder()
                 .WithTcpServer(ConfigurationManager.AppSettings["MqttBroker"],
@@ -106,6 +121,7 @@ namespace TerminalService
 
                 await SubscribeToCommands();
 
+                // Dừng timer nếu kết nối thành công
                 reconnectTimer?.Stop();
             }
             catch (Exception ex)
@@ -115,11 +131,22 @@ namespace TerminalService
                 if (reconnectTimer == null)
                 {
                     reconnectTimer = new System.Timers.Timer(ReconnectInterval);
-                    reconnectTimer.Elapsed += async (s, e) => await ConnectMqttAsync();
+                    reconnectTimer.Elapsed += async (s, e) =>
+                    {
+                        if (!mqttClient.IsConnected)
+                        {
+                            log.Warn("Trying to reconnect to MQTT...");
+                            await ConnectMqttAsync();
+                        }
+                    };
+                    reconnectTimer.AutoReset = true;
                 }
-                reconnectTimer.Start();
+
+                if (!reconnectTimer.Enabled)
+                    reconnectTimer.Start();
             }
         }
+
 
         private void GetSerialNumber()
         {

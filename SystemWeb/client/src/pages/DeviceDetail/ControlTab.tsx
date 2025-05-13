@@ -86,12 +86,12 @@ function ControlTab({ device }: ControlTabProps) {
                 </Tab>
             </TabList>
             {activeIndex !== 0 && (
-                <TabPanels >
+                <TabPanels>
                     <TabPanel className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
-                        <Shutdown />
+                        <Shutdown serialNumber={device.serialNumber} />
                     </TabPanel>
                     <TabPanel className="bg-white p-10 rounded-xl shadow-md min-w-[200px]">
-                        <Restart />
+                        <Restart serialNumber={device.serialNumber} />
                     </TabPanel>
                     <TabPanel>
                         <GetProcesses serialNumber={device.serialNumber} />

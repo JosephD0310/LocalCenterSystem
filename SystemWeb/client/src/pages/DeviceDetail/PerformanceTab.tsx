@@ -3,15 +3,26 @@ import { DoughnutChart } from '../../components/Chart/DoughnutChart';
 import ProgressBar from '../../components/ProgressBar';
 import { DeviceData } from '../../types/devicedata';
 import { faCompactDisc, faMemory, faMicrochip } from '@fortawesome/free-solid-svg-icons';
+import useSocket from '../../services/hooks/useSocket';
+import { useEffect, useState } from 'react';
 
 type PerformanceProps = {
     item: DeviceData;
 };
 
 function PerformanceTab({ item }: PerformanceProps) {
-    const cpuInUse = item.cpu.usage;
-    const ramInUse = ((item.ram.total * 1024 - item.ram.available) / 1024 / item.ram.total) * 100;
-    const diskInUse = (item.diskDrive.used / item.diskDrive.size) * 100;
+    const [device, setDevice] = useState<DeviceData>(item);
+    const {data} = useSocket();
+
+    useEffect(() => {
+        if (data && data.serialNumber === item.serialNumber) {
+            setDevice(data);
+        }
+    }, [data]);
+
+    const cpuInUse = device.cpu.usage;
+    const ramInUse = ((device.ram.total * 1024 - device.ram.available) / 1024 / device.ram.total) * 100;
+    const diskInUse = (device.diskDrive.used / device.diskDrive.size) * 100;
 
     return (
         <div className="flex flex-row gap-5">
@@ -21,23 +32,23 @@ function PerformanceTab({ item }: PerformanceProps) {
                         <h2 className="text-4xl font-bold">
                             <FontAwesomeIcon icon={faMicrochip} /> CPU
                         </h2>
-                        <h2 className="text-2xl text-gray-600">{item.cpu.name}</h2>
+                        <h2 className="text-2xl text-gray-600">{device.cpu.name}</h2>
                     </div>
                     <div className="flex flex-row justify-between items-center p-10">
                         <div className="flex flex-wrap gap-10">
                             <div>
                                 <h3 className="text-2xl text-gray-500">Base Speed</h3>
                                 <p className="text-3xl font-semibold">
-                                    {(item.cpu.maxClockSpeed / 1000).toFixed(2)} GHz
+                                    {(device.cpu.maxClockSpeed / 1000).toFixed(2)} GHz
                                 </p>
                             </div>
                             <div>
                                 <h3 className="text-2xl text-gray-500">Cores</h3>
-                                <p className="text-3xl font-semibold">{item.cpu.numberOfCores}</p>
+                                <p className="text-3xl font-semibold">{device.cpu.numberOfCores}</p>
                             </div>
                             <div>
                                 <h3 className="text-2xl text-gray-500">Processors</h3>
-                                <p className="text-3xl font-semibold">{item.cpu.threadCount}</p>
+                                <p className="text-3xl font-semibold">{device.cpu.threadCount}</p>
                             </div>
                         </div>
                         <DoughnutChart percent={cpuInUse} />
@@ -48,19 +59,19 @@ function PerformanceTab({ item }: PerformanceProps) {
                 <div>
                     <div className="pb-5 border-b border-gray-400">
                         <h2 className="text-4xl font-bold"><FontAwesomeIcon icon={faMemory} /> Memory</h2>
-                        <h2 className="text-2xl text-gray-600">RAM ・ {item.ram.total}GB</h2>
+                        <h2 className="text-2xl text-gray-600">RAM ・ {device.ram.total}GB</h2>
                     </div>
                     <div className="flex flex-row justify-between items-center p-10">
                         <div className="flex flex-wrap gap-x-10">
                             <div>
                                 <h3 className="text-2xl text-gray-500">In Use</h3>
                                 <p className="text-3xl font-semibold">
-                                    {((item.ram.total * 1024 - item.ram.available) / 1024).toFixed(1)} GB
+                                    {((device.ram.total * 1024 - device.ram.available) / 1024).toFixed(1)} GB
                                 </p>
                             </div>
                             <div>
                                 <h3 className="text-2xl text-gray-500">Available</h3>
-                                <p className="text-3xl font-semibold">{(item.ram.available / 1024).toFixed(1)} GB</p>
+                                <p className="text-3xl font-semibold">{(device.ram.available / 1024).toFixed(1)} GB</p>
                             </div>
                         </div>
                         <DoughnutChart percent={ramInUse}></DoughnutChart>
@@ -71,11 +82,11 @@ function PerformanceTab({ item }: PerformanceProps) {
                 <div>
                     <div className="pb-5 border-b border-gray-400">
                         <h2 className="text-4xl font-bold"><FontAwesomeIcon icon={faCompactDisc} /> Disk</h2>
-                        <h2 className="text-2xl text-gray-600">{item.diskDrive.model}</h2>
+                        <h2 className="text-2xl text-gray-600">{device.diskDrive.model}</h2>
                     </div>
                     <div className="flex flex-row justify-between items-center p-10 gap-5">
                         <div className="max-h-52 overflow-y-auto overflow-x-hidden pr-10">
-                            {item.logicalDisks.map((disk, index) => {
+                            {device.logicalDisks.map((disk, index) => {
                                 const used = disk.size - disk.freeSpace;
                                 const diskInUse = disk.size > 0 ? (used / disk.size) * 100 : 0;
 

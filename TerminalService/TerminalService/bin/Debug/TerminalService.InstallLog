@@ -85,3 +85,70 @@ Affected parameters are:
    logtoconsole = 
    logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
    assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Uninstalling assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Removing EventLog source DHMLTerminalService.
+Service DHMLTerminalService is being removed from the system...
+Service DHMLTerminalService was successfully removed from the system.
+Uninstalling assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Removing EventLog source DHMLTerminalService.
+Warning: The source DHMLTerminalService is not registered on the local machine.
+Service DHMLTerminalService is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: The specified service does not exist as an installed service
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Removing EventLog source DHMLTerminalService.
+Warning: The source DHMLTerminalService is not registered on the local machine.
+Service DHMLTerminalService is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: The specified service does not exist as an installed service
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Installing service DHMLTerminalService...
+Service DHMLTerminalService has been successfully installed.
+Creating EventLog source DHMLTerminalService in log Application...
+Committing assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Uninstalling assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Removing EventLog source DHMLTerminalService.
+Warning: The source DHMLTerminalService is not registered on the local machine.
+Service DHMLTerminalService is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: The specified service does not exist as an installed service
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe
+Installing service DHMLTerminalService...
+Service DHMLTerminalService has been successfully installed.
+Creating EventLog source DHMLTerminalService in log Application...
+Committing assembly 'E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.InstallLog
+   assemblypath = E:\LINH\Document\BK\20242\GR\Code\TerminalService\TerminalService\bin\Debug\TerminalService.exe

@@ -28,6 +28,8 @@
     "@nestjs/typeorm": "^11.0.0",
     "@nestjs/websockets": "^11.0.20",
     "axios": "^1.8.4",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "express-session": "^1.18.1",
     "mqtt": "^5.11.0",
     "mysql2": "^3.14.0",
