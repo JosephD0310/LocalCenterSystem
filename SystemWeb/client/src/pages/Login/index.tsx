@@ -11,7 +11,7 @@ function Login() {
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/auth/login', {
+            const res = await axios.post('https://localcentersystem.onrender.com/auth/login', {
                 email,
                 password,
             });

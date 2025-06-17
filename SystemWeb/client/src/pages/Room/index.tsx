@@ -18,7 +18,7 @@ function Room() {
 
     const { data: mqttData } = useSocket();
     const { data: initialData, loading } = useFetch<DeviceData[]>(
-        'http://localhost:3000/devices/latest-by-room/' + roomName,
+        'https://localcentersystem.onrender.com/devices/latest-by-room/' + roomName,
     );
 
     const [devices, setDevices] = useState<DeviceData[]>([]);
