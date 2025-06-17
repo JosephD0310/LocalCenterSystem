@@ -7,26 +7,31 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DevicesModule } from './devices/devices.module';
 import { Device } from './devices/entities/device.entity';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
 
 @Module({
     imports: [
+        ConfigModule.forRoot({ isGlobal: true }),
         MqttModule,
         EventsModule,
-        TypeOrmModule.forRoot({
-            type: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: '123456',
-            database: 'localcenter',
-            entities: [Device, User],
-            synchronize: true,
+        TypeOrmModule.forRootAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: (config: ConfigService) => ({
+                type: 'mysql',
+                host: config.get<string>('DB_HOST'),
+                port: config.get<number>('DB_PORT'),
+                username: config.get<string>('DB_USERNAME'),
+                password: config.get<string>('DB_PASSWORD'),
+                database: config.get<string>('DB_NAME'),
+                entities: [Device, User],
+                autoLoadEntities: true,
+                synchronize: true,
+            }),
         }),
         DevicesModule,
-        ConfigModule.forRoot({ isGlobal: true }),
         AuthModule,
         UserModule,
     ],

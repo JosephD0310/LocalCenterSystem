@@ -15,23 +15,23 @@ const mockAlerts = [
     {
         room: 'B1-401',
         deviceName: 'PC-A01',
-        message: 'CPU usage > 90%',
+        message: 'Disk usage > 90%',
         time: 'Jun 13, 2025, 20:14',
     },
     {
-        room: 'B1-401',
+        room: 'B1-402',
         deviceName: 'PC-A01',
         message: 'CPU usage > 90%',
         time: 'Jun 13, 2025, 20:14',
     },
     {
-        room: 'B1-401',
+        room: 'B1-403',
         deviceName: 'PC-A01',
-        message: 'CPU usage > 90%',
+        message: 'RAM usage > 90%',
         time: 'Jun 13, 2025, 20:14',
     },
     {
-        room: 'B1-401',
+        room: 'B1-404',
         deviceName: 'PC-A01',
         message: 'CPU usage > 90%',
         time: 'Jun 13, 2025, 20:14',
@@ -83,10 +83,10 @@ function Home() {
                     </h2>
                     <div className="flex flex-row justify-between items-center">
                         <div className="flex flex-row gap-10 text-gray-600">
-                            <RoomOverview />
-                            <RoomOverview />
-                            <RoomOverview />
-                            <RoomOverview />
+                            <RoomOverview roomName={'B1-201'} healthPercentage={90} cpuUsage={90} alertCount={2} />
+                            <RoomOverview roomName={'B1-202'} healthPercentage={95} cpuUsage={80} alertCount={5} />
+                            <RoomOverview roomName={'B1-203'} healthPercentage={80} cpuUsage={70} alertCount={0} />
+                            <RoomOverview roomName={'B1-204'} healthPercentage={85} cpuUsage={75} alertCount={1} />
                         </div>
                     </div>
                 </div>

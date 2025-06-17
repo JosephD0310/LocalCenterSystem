@@ -8,7 +8,7 @@ function SystemPerformance() {
                 <div className='flex items-center justify-between mb-4'>
                     <span>Average CPU</span>
                     <span className='text-red-500'>
-                        67% <FontAwesomeIcon icon={faArrowTrendUp} />
+                        60% <FontAwesomeIcon icon={faArrowTrendUp} />
                     </span>
                 </div>
                 <div className='flex items-center justify-between mb-4'>
@@ -20,7 +20,7 @@ function SystemPerformance() {
                 <div className='flex items-center justify-between mb-4'>
                     <span>Disk Usage</span>
                     <span className='text-red-500'>
-                        67% <FontAwesomeIcon icon={faArrowTrendUp} />
+                        72% <FontAwesomeIcon icon={faArrowTrendUp} />
                     </span>
                 </div>
             </div>
