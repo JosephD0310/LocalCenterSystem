@@ -7,6 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DevicesModule } from './devices/devices.module';
 import { Device } from './devices/entities/device.entity';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './user/user.module';
+import { User } from './user/user.entity';
 
 @Module({
     imports: [
@@ -19,11 +22,13 @@ import { AuthModule } from './auth/auth.module';
             username: 'root',
             password: '123456',
             database: 'localcenter',
-            entities: [Device],
+            entities: [Device, User],
             synchronize: true,
         }),
         DevicesModule,
+        ConfigModule.forRoot({ isGlobal: true }),
         AuthModule,
+        UserModule,
     ],
     controllers: [AppController],
     providers: [AppService],

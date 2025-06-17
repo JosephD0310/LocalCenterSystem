@@ -4,54 +4,23 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate();
-
-    const [credentials, setCredentials] = useState({
-        account: '',
-        password: '',
-    });
-
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    };
-
-    const checkHustTeacher = async (account: string, password: string) => {
-        try {
-            const res = await axios.post('http://localhost:3000/auth/login', {
-                email: account,
-                password: password,
-            });
-    
-            if (res.data.success) {
-                return {
-                    success: true,
-                    message: 'Là giáo viên HUST',
-                };
-            } else {
-                return {
-                    success: false,
-                    message: 'Sai tài khoản hoặc mật khẩu',
-                };
-            }
-        } catch (error: any) {
-            console.error('Lỗi khi gọi API HUST:', error);
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Lỗi kết nối đến hệ thống HUST',
-            };
-        }
-    };
 
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const result = await checkHustTeacher(credentials.account, credentials.password);
-        if (result.success) {
-            localStorage.setItem("isLoggedIn", "true");
-            navigate('/');
-            console.log(result.message)
-        } else {
-            setError(result.message);
+        try {
+            const res = await axios.post('http://localhost:3000/auth/login', {
+                email,
+                password,
+            });
+            console.log(res.data);
+            localStorage.setItem('token', res.data.access_token);
+            localStorage.setItem('email', res.data.user.email); 
+            navigate("/");
+        } catch (err) {
+            setError('Đăng nhập thất bại');
         }
     };
 
@@ -86,8 +55,7 @@ function Login() {
                         type="email"
                         placeholder="Email"
                         id="account"
-                        value={credentials.account}
-                        onChange={handleChange}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                         required
@@ -95,17 +63,9 @@ function Login() {
                         type="password"
                         placeholder="Password"
                         id="password"
-                        value={credentials.password}
-                        onChange={handleChange}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
-                    <div className="flex flex-row items-center justify-between">
-                        <div className="flex flex-row items-center gap-2">
-                            <input className="p-5" type="checkbox" id="rememberMe" />
-                            <label htmlFor="rememberMe">Remember me</label>
-                        </div>
-                        <div className="text-green-500">Forgot password?</div>
-                    </div>
-                    <button className="px-5 py-2.5 rounded-[15px] bg-[#02E079]" onClick={handleLogin}>
+                    <button className="px-5 py-2.5 rounded-[15px] font-bold bg-green-500 cursor-pointer hover:bg-green-600 active:bg-green-700" onClick={handleLogin}>
                         Login
                     </button>
                 </form>
@@ -116,3 +76,4 @@ function Login() {
 }
 
 export default Login;
+

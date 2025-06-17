@@ -11,7 +11,7 @@ type UsageLogsProps = {
     serialNumber: string;
 };
 function UsageLogsTab({ serialNumber }: UsageLogsProps) {
-    const { data, loading } = useFetch<DeviceData[]>(`http://localhost:3000/devices/usage-logs/${serialNumber}`);
+    const { data, loading } = useFetch<DeviceData[]>(`/devices/usage-logs/${serialNumber}`);
 
     const [logs, setLogs] = useState<DeviceData[]>([]);
     const {data: mqttData} = useSocket();

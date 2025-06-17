@@ -1,0 +1,116 @@
+Date : 2025-06-07 17:27:14
+Directory : e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client
+Total : 52 files,  6347 codes, 29 comments, 224 blanks, all 6600 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          5 |      4,754 |          4 |          8 |      4,766 |
+| TypeScript JSX     |         34 |      1,416 |         21 |        187 |      1,624 |
+| Markdown           |          1 |         45 |          0 |         10 |         55 |
+| XML                |          5 |         37 |          0 |          3 |         40 |
+| PostCSS            |          1 |         35 |          0 |          8 |         43 |
+| JavaScript         |          2 |         34 |          2 |          3 |         39 |
+| HTML               |          1 |         13 |          0 |          1 |         14 |
+| JSON with Comments |          1 |          7 |          0 |          1 |          8 |
+| TypeScript         |          2 |          6 |          2 |          3 |         11 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                       | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                          |         52 |      6,347 |         29 |        224 |      6,600 |
+| . (Files)                                                                                                  |         11 |      4,859 |          7 |         25 |      4,891 |
+| public                                                                                                     |          3 |         33 |          0 |          2 |         35 |
+| src                                                                                                        |         38 |      1,455 |         22 |        197 |      1,674 |
+| src (Files)                                                                                                |          3 |         40 |          1 |          6 |         47 |
+| src\assets                                                                                                 |          2 |          4 |          0 |          1 |          5 |
+| src\components                                                                                             |         12 |        339 |          0 |         65 |        404 |
+| src\components\Chart                                                                                       |          3 |         77 |          0 |         14 |         91 |
+| src\components\DeviceCard                                                                                  |          1 |         87 |          0 |          9 |         96 |
+| src\components\GlobalStyles                                                                                |          2 |         44 |          0 |         11 |         55 |
+| src\components\Popper                                                                                      |          2 |         30 |          0 |         10 |         40 |
+| src\components\ProgressBar                                                                                 |          1 |         11 |          0 |          3 |         14 |
+| src\components\Status                                                                                      |          1 |         25 |          0 |          7 |         32 |
+| src\components\SvgComponents                                                                               |          1 |         28 |          0 |          3 |         31 |
+| src\components\Tabs                                                                                        |          1 |         37 |          0 |          8 |         45 |
+| src\config                                                                                                 |          2 |         13 |          0 |          3 |         16 |
+| src\layout                                                                                                 |          3 |         88 |          0 |         10 |         98 |
+| src\layout\DefaultLayout                                                                                   |          1 |         18 |          0 |          4 |         22 |
+| src\layout\components                                                                                      |          2 |         70 |          0 |          6 |         76 |
+| src\layout\components\Header                                                                               |          1 |         39 |          0 |          3 |         42 |
+| src\layout\components\Navbar                                                                               |          1 |         31 |          0 |          3 |         34 |
+| src\pages                                                                                                  |         11 |        854 |         20 |         88 |        962 |
+| src\pages\DeviceDetail                                                                                     |          8 |        693 |          1 |         67 |        761 |
+| src\pages\DeviceDetail (Files)                                                                             |          4 |        363 |          0 |         29 |        392 |
+| src\pages\DeviceDetail\ControlFeatures                                                                     |          4 |        330 |          1 |         38 |        369 |
+| src\pages\Devices                                                                                          |          1 |         42 |          4 |          8 |         54 |
+| src\pages\Home                                                                                             |          1 |         10 |         15 |          3 |         28 |
+| src\pages\Login                                                                                            |          1 |        109 |          0 |         10 |        119 |
+| src\routes                                                                                                 |          1 |         32 |          0 |          3 |         35 |
+| src\services                                                                                               |          3 |         68 |          1 |         19 |         88 |
+| src\services\PrivateRoute                                                                                  |          1 |         10 |          1 |          4 |         15 |
+| src\services\hooks                                                                                         |          2 |         58 |          0 |         15 |         73 |
+| src\types                                                                                                  |          1 |         17 |          0 |          2 |         19 |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                   | language           | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\.prettierrc                                             | JSON               |         19 |          0 |          0 |         19 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\README.md                                               | Markdown           |         45 |          0 |         10 |         55 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\eslint.config.js                                        | JavaScript         |         27 |          0 |          2 |         29 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\index.html                                              | HTML               |         13 |          0 |          1 |         14 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\package-lock.json                                       | JSON               |      4,649 |          0 |          1 |      4,650 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\package.json                                            | JSON               |         44 |          0 |          1 |         45 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\public\icon.svg                                         | XML                |         16 |          0 |          1 |         17 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\public\logo.svg                                         | XML                |         16 |          0 |          1 |         17 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\public\vite.svg                                         | XML                |          1 |          0 |          0 |          1 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\App.tsx                                             | TypeScript JSX     |         29 |          0 |          3 |         32 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\assets\Background.svg                               | XML                |          3 |          0 |          1 |          4 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\assets\react.svg                                    | XML                |          1 |          0 |          0 |          1 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Chart\DoughnutChart.tsx                  | TypeScript JSX     |         36 |          0 |          6 |         42 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Chart\DoughnutChartv2.tsx                | TypeScript JSX     |         41 |          0 |          7 |         48 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Chart\index.tsx                          | TypeScript JSX     |          0 |          0 |          1 |          1 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\DeviceCard\index.tsx                     | TypeScript JSX     |         87 |          0 |          9 |         96 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\GlobalStyles\GlobalStyles.css            | PostCSS            |         35 |          0 |          8 |         43 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\GlobalStyles\index.tsx                   | TypeScript JSX     |          9 |          0 |          3 |         12 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Popper\Item.tsx                          | TypeScript JSX     |         22 |          0 |          7 |         29 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Popper\Wrapper.tsx                       | TypeScript JSX     |          8 |          0 |          3 |         11 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\ProgressBar\index.tsx                    | TypeScript JSX     |         11 |          0 |          3 |         14 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Status\index.tsx                         | TypeScript JSX     |         25 |          0 |          7 |         32 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\SvgComponents\BgBox.tsx                  | TypeScript JSX     |         28 |          0 |          3 |         31 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\components\Tabs\index.tsx                           | TypeScript JSX     |         37 |          0 |          8 |         45 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\config\index.tsx                                    | TypeScript JSX     |          5 |          0 |          2 |          7 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\config\routes.tsx                                   | TypeScript JSX     |          8 |          0 |          1 |          9 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\layout\DefaultLayout\index.tsx                      | TypeScript JSX     |         18 |          0 |          4 |         22 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\layout\components\Header\index.tsx                  | TypeScript JSX     |         39 |          0 |          3 |         42 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\layout\components\Navbar\index.tsx                  | TypeScript JSX     |         31 |          0 |          3 |         34 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\main.tsx                                            | TypeScript JSX     |         11 |          0 |          2 |         13 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\ControlFeatures\Firewall.tsx     | TypeScript JSX     |         89 |          0 |         11 |        100 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\ControlFeatures\GetProcesses.tsx | TypeScript JSX     |        181 |          1 |         17 |        199 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\ControlFeatures\Restart.tsx      | TypeScript JSX     |         30 |          0 |          5 |         35 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\ControlFeatures\Shutdown.tsx     | TypeScript JSX     |         30 |          0 |          5 |         35 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\ControlTab.tsx                   | TypeScript JSX     |        102 |          0 |          7 |        109 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\PerformanceTab.tsx               | TypeScript JSX     |        109 |          0 |          9 |        118 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\UsageLogsTab.tsx                 | TypeScript JSX     |         74 |          0 |          7 |         81 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\DeviceDetail\index.tsx                        | TypeScript JSX     |         78 |          0 |          6 |         84 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\Devices\index.tsx                             | TypeScript JSX     |         42 |          4 |          8 |         54 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\Home\index.tsx                                | TypeScript JSX     |         10 |         15 |          3 |         28 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\pages\Login\index.tsx                               | TypeScript JSX     |        109 |          0 |         10 |        119 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\routes\index.tsx                                    | TypeScript JSX     |         32 |          0 |          3 |         35 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\services\PrivateRoute\index.tsx                     | TypeScript JSX     |         10 |          1 |          4 |         15 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\services\hooks\useFetch.tsx                         | TypeScript JSX     |         32 |          0 |          6 |         38 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\services\hooks\useSocket.tsx                        | TypeScript JSX     |         26 |          0 |          9 |         35 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\types\devicedata.tsx                                | TypeScript JSX     |         17 |          0 |          2 |         19 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\src\vite-env.d.ts                                       | TypeScript         |          0 |          1 |          1 |          2 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\tailwind.config.js                                      | JavaScript         |          7 |          2 |          1 |         10 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\tsconfig.app.json                                       | JSON               |         22 |          2 |          3 |         27 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\tsconfig.json                                           | JSON with Comments |          7 |          0 |          1 |          8 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\tsconfig.node.json                                      | JSON               |         20 |          2 |          3 |         25 |
+| e:\LINH\Document\BK\20242\GR\Code\SystemWeb\client\vite.config.ts                                          | TypeScript         |          6 |          1 |          2 |          9 |
+| Total                                                                                                      |                    |      6,347 |         29 |        224 |      6,600 |
++------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

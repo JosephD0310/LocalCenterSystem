@@ -7,11 +7,11 @@ import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 
-type CardProps = {
+type DeviceCardProps = {
     item: DeviceData;
 };
 
-function DeviceCard({ item }: CardProps) {
+function DeviceCard({ item }: DeviceCardProps) {
     const checkDeviceState = (updatedAt: string) => {
         const currentTime = new Date().getTime();
         const lastUpdateDate = new Date(updatedAt).getTime();
@@ -34,7 +34,7 @@ function DeviceCard({ item }: CardProps) {
 
     return (
         <Link key={item.serialNumber} to={config.routes.generateDeviceDetail(item.deviceId)} state={item}>
-            <div className="bg-white w-[300px] rounded-2xl shadow-xs px-7 py-5">
+            <div className="bg-white w-[300px] rounded-2xl shadow-sm px-7 py-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-row gap-5 items-center">
                         <FontAwesomeIcon

@@ -1,25 +1,44 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes } from './routes';
-import { Fragment } from 'react/jsx-runtime';
-import PrivateRoute from './services/PrivateRoute';
+import { publicRoutes, privateRoutes } from './routes';
+import PrivateRoute from './components/PrivateRoute';
+import { Fragment } from 'react';
 
 function App() {
     return (
         <Router>
             <Routes>
+                {/* Public routes */}
                 {publicRoutes.map((route, index) => {
                     const Layout = route.layout || Fragment;
                     const Page = route.component;
-                    const Element = (
-                        <Layout>
-                            <Page />
-                        </Layout>
-                    );
                     return (
                         <Route
                             key={index}
                             path={route.path}
-                            element={route.isPrivate ? <PrivateRoute>{Element}</PrivateRoute> : Element}
+                            element={
+                                <Layout>
+                                    <Page />
+                                </Layout>
+                            }
+                        />
+                    );
+                })}
+
+                {/* Private routes */}
+                {privateRoutes.map((route, index) => {
+                    const Layout = route.layout || Fragment;
+                    const Page = route.component;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                                <PrivateRoute>
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                </PrivateRoute>
+                            }
                         />
                     );
                 })}

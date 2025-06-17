@@ -8,12 +8,12 @@ type LayoutProps = {
 
 function DefaultLayout({ children }: LayoutProps) {
     return (
-        <div className="relative bg-[#2F3C33] p-2 h-screen">
-            <div className="absolute w-[calc(100%-25px)]">
-                <Header />
-                {children}
-            </div>
+        <div className="relative bg-[#2F3C33] h-screen overflow-hidden p-4">
             <BgBox className="h-full w-full" />
+            <div className="absolute inset-0 p-2 z-10">
+                <Header/>
+                <div>{children}</div>
+            </div>
         </div>
     );
 }

@@ -2,8 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 
+
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; 
 }
 
 ::-webkit-scrollbar {
@@ -40,4 +41,11 @@ a {
   display: flex;
   align-items: center;
   width: fit-content;
+}
+
+select:focus {
+  outline: none;
+  /* hoặc custom outline */
+  /* outline: 2px solid #85CC16; */
+  /* box-shadow: 0 0 0 2px #85CC16; */
 }

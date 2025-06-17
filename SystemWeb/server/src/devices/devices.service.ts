@@ -21,7 +21,23 @@ export class DevicesService {
             GROUP BY serialNumber
           ) d2 ON d1.serialNumber = d2.serialNumber AND d1.updatedAt = d2.maxUpdatedAt
         `);
-      }
+    }
+
+    async findLatestByRoom(room: string): Promise<Device[]> {
+        return this.devicesRepo.query(
+            `
+            SELECT d1.*
+            FROM device d1
+            INNER JOIN (
+            SELECT serialNumber, MAX(updatedAt) AS maxUpdatedAt
+            FROM device
+            GROUP BY serialNumber
+            ) d2 ON d1.serialNumber = d2.serialNumber AND d1.updatedAt = d2.maxUpdatedAt
+            WHERE d1.room = ?
+        `,
+            [room],
+        );
+    }
 
     async findAllBySerialNumber(serialNumber: string): Promise<Device[]> {
         return this.devicesRepo.find({

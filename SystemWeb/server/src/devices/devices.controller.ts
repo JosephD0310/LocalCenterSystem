@@ -11,6 +11,11 @@ export class DevicesController {
         return this.devicesService.findLatestOfAllDevices();
     }
 
+    @Get('latest-by-room/:room')
+    async getLatestByRoom(@Param('room') room: string) {
+        return this.devicesService.findLatestByRoom(room);
+    }
+
     @Get('usage-logs/:serialNumber')
     getHistory(@Param('serialNumber') serialNumber: string) {
         return this.devicesService.findAllBySerialNumber(serialNumber);

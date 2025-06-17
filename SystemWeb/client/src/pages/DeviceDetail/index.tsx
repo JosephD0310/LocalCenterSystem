@@ -25,17 +25,21 @@ function DeviceDetail() {
     }, [data]);
 
     return (
-        <div className="p-10">
+        <div className="p-10 max-h-[calc(100vh-60px)] flex flex-col">
             <div className="flex flex-row items-center gap-5">
                 <Link to={config.routes.devices} className="font-medium text-4xl">
-                    All Devices
+                    Device Management
+                </Link>
+                <FontAwesomeIcon icon={faChevronRight} />
+                <Link to={config.routes.generateRoom(item.room)} state={item.room} className="font-medium text-4xl">
+                    Room {device.room}
                 </Link>
                 <FontAwesomeIcon icon={faChevronRight} />
                 <h2 className="font-bold text-4xl">{device.hostname}</h2>
                 <Status content={device.status} />
             </div>
-            <div className="mx-10 mt-10 bg-white rounded-2xl shadow-xs p-10">
-                <div className="flex ">
+            <div className="mt-10 bg-white rounded-2xl shadow-xs p-10 overflow-y-auto overflow-x-hidden pr-10">
+                <div className="flex gap-10 mb-5">
                     <div className="w-1/2 flex flex-row justify-center items-center">
                         <FontAwesomeIcon
                             icon={faDesktop}
@@ -43,7 +47,7 @@ function DeviceDetail() {
                             color="#fff"
                         />
                     </div>
-                    <div className="w-1/2 flex flex-row gap-20">
+                    <div className="w-1/2 flex flex-row gap-20 rounded-2xl">
                         <div className="text-gray-600">
                             <p>Name</p>
                             <p>Serial number</p>
