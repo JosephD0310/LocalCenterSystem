@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('https://localcentersystem.onrender.com'); // địa chỉ backend
+const socket = io(import.meta.env.VITE_API_BASE_DEV); // địa chỉ backend
 
 function useSocket() {
     const [data, setData] = useState<any>(null);

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../utils/axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ function Login() {
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://localcentersystem.onrender.com/auth/login', {
+            const res = await api.post('/auth/login', {
                 email,
                 password,
             });

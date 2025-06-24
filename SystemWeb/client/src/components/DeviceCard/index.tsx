@@ -80,7 +80,10 @@ function DeviceCard({ item }: DeviceCardProps) {
                     </div>
                     <div>
                         <p className="text-2xl text-gray-600">
-                            Location: {item.room} ・ Number: {item.deviceId}
+                            Location: {item.room}
+                        </p>
+                        <p className="text-2xl text-gray-600">
+                            Number: {item.deviceId}
                         </p>
                         <p className="text-2xl text-gray-600">
                             Last updated: {dayjs(item.updatedAt).format('DD/MM/YYYY HH:mm')}

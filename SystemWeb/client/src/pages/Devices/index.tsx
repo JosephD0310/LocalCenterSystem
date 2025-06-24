@@ -78,46 +78,53 @@ function Devices() {
     }, [devices]);
 
     return (
-        <div className="p-10">
+        <div className="p-10 overflow-y-auto overflow-x-hidden pr-10 max-h-[calc(100vh-70px)]">
             <h2 className="font-bold text-4xl text-center">Device Management</h2>
-            <div>
-                <TabGroup>
-                    <div className='flex justify-center mt-10 mb-5'>
-                        <TabList className="text-2xl bg-white inline-flex rounded-full p-2 shadow-xs">
-                            <Tab
-                                className={`min-w-[80px] rounded-full cursor-pointer p-3 ${
-                                    1 === activeIndex ? 'bg-[#85CC16] text-white font-semibold' : 'text-gray-500'
-                                }`}
-                                onClick={() => setActiveIndex(1)}
-                            >
-                                <span>All</span>
-                            </Tab>
-                            <Tab
-                                className={`min-w-[80px] rounded-full cursor-pointer p-3 ${
-                                    2 === activeIndex ? 'bg-[#85CC16] text-white font-semibold' : 'text-gray-500'
-                                }`}
-                                onClick={() => setActiveIndex(2)}
-                            >
-                                <span>Room</span>
-                            </Tab>
-                        </TabList>
-                    </div>
-                    {activeIndex !== 0 && (
-                        <TabPanels className="p-10">
-                            <TabPanel className="flex flex-wrap gap-5">
-                                {loading
-                                    ? 'Loading please wait...'
-                                    : devices.map((item) => <DeviceCard key={item.serialNumber} item={item} />)}
-                            </TabPanel>
-                            <TabPanel className="flex flex-wrap gap-5">
-                                {loading
-                                    ? 'Loading please wait...'
-                                    : rooms.map((item) => <RoomCard key={item.roomName} item={item} />)}
-                            </TabPanel>
-                        </TabPanels>
-                    )}
-                </TabGroup>
-            </div>
+            {loading ? (
+                <div className="flex items-center justify-center py-10">
+                    <div className="w-10 h-10 border-4 border-[#86CC16] border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            ) : (
+                <div>
+                    <TabGroup>
+                        <div className="flex justify-center mt-10 mb-5">
+                            <TabList className="text-2xl bg-white inline-flex rounded-full p-2 shadow-xs">
+                                <Tab
+                                    className={`min-w-[80px] rounded-full cursor-pointer p-3 ${
+                                        1 === activeIndex ? 'bg-[#85CC16] text-white font-semibold' : 'text-gray-500'
+                                    }`}
+                                    onClick={() => setActiveIndex(1)}
+                                >
+                                    <span>All</span>
+                                </Tab>
+                                <Tab
+                                    className={`min-w-[80px] rounded-full cursor-pointer p-3 ${
+                                        2 === activeIndex ? 'bg-[#85CC16] text-white font-semibold' : 'text-gray-500'
+                                    }`}
+                                    onClick={() => setActiveIndex(2)}
+                                >
+                                    <span>Room</span>
+                                </Tab>
+                            </TabList>
+                        </div>
+                        {activeIndex !== 0 && (
+                            <TabPanels className="p-10">
+                                <TabPanel className="flex flex-wrap gap-x-15 gap-y-10">
+                                    {devices.map((item) => (
+                                        <DeviceCard key={item.serialNumber} item={item} />
+                                    ))}
+                                </TabPanel>
+                                <TabPanel className="flex flex-wrap justify-evenly gap-x-15 gap-y-10">
+                                    {rooms.map((item) => {
+                                        console.log(item.healthyCount);
+                                        return <RoomCard key={item.roomName} item={item} />;
+                                    })}
+                                </TabPanel>
+                            </TabPanels>
+                        )}
+                    </TabGroup>
+                </div>
+            )}
         </div>
     );
 }

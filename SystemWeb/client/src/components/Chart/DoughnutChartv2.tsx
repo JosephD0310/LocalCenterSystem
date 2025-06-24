@@ -17,7 +17,7 @@ export const DoughnutChartv2 = ({ health, unhealth, total }: Props) => {
         datasets: [
             {
                 data: [health, unhealth, offline],
-                backgroundColor: ['#1ED760', '#F7CA4C', '#D4DBE6'], // xanh lá, cam, xám
+                backgroundColor: ['#85CC16', '#F7CA4C', '#D4DBE6'], // xanh lá, cam, xám
                 borderWidth: 1,
             },
         ],

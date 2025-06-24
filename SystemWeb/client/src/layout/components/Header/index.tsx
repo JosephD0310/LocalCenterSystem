@@ -23,16 +23,20 @@ function Header() {
                     <img src="./logofull.svg" alt="" />
                 </Link>
                 <Popover className="relative">
-                    <PopoverButton className="cursor-pointer outline-0 w-12 h-12 rounded-full bg-[#85CC16] text-white flex items-center justify-center font-bold hover:bg-[#6DAA14] transition duration-200 ease-in-out">
-                        {avatarLetter}
-                    </PopoverButton>
+                    <div className="flex flex-row items-center gap-5 bg-[#DDF1BF] p-2 rounded-full">
+                        <p className='cursor-default font-bold ml-5'>{email ? email.replace('@sis.hust.edu.vn', '') : 'User'}</p>
+                        <PopoverButton className="cursor-pointer outline-0 w-12 h-12 rounded-full bg-[#85CC16] text-white flex items-center justify-center font-bold hover:bg-[#6DAA14] transition duration-200 ease-in-out">
+                            {avatarLetter}
+                        </PopoverButton>
+                    </div>
                     <PopoverPanel
                         anchor="bottom end"
                         className="mt-5 flex flex-col rounded-md shadow transition duration-200 ease-in-out bg-[#2F3C33] text-white z-20"
                     >
                         <div className="">
                             <h2 className="px-7 py-5 text-2xl font-bold border-b-3 border-[#85CC16] flex items-start gap-5">
-                               <FontAwesomeIcon icon={faUser} /> {email ? email.replace('@sis.hust.edu.vn', '') : 'User'}
+                                <FontAwesomeIcon icon={faUser} />{' '}
+                                {email ? email.replace('@sis.hust.edu.vn', '') : 'User'}
                             </h2>
                         </div>
                         <div className="py-2">
