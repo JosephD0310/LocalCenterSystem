@@ -18,9 +18,7 @@ import { DeviceData } from '../../types/devicedata';
 import { RoomData } from '../../types/roomdata';
 import Carousel from '../../components/Carousel';
 
-const mockAlerts: { room: string; deviceName: string; message: string; time: string; }[] = [
-    
-];
+const mockAlerts: { room: string; deviceName: string; message: string; time: string }[] = [];
 
 function Home() {
     const { data: mqttData } = useSocket();
@@ -72,13 +70,9 @@ function Home() {
             const checkDeviceState = (updatedAt: string) => {
                 const currentTime = new Date().getTime();
                 const lastUpdateDate = new Date(updatedAt).getTime();
-                const timeDifference = currentTime - lastUpdateDate; // Tính chênh lệch thời gian (ms)
-                const tenMinutesInMs = 3 * 60 * 1000; // 10 phút tính theo ms
-
-                if (timeDifference > tenMinutesInMs) {
-                    return 'offline';
-                }
-                return 'online';
+                const timeDifference = currentTime - lastUpdateDate;
+                const timeLimit = 1.5 * 60 * 1000;
+                return timeDifference > timeLimit ? 'offline' : 'online';
             };
 
             let deviceState = device.status;
@@ -93,6 +87,9 @@ function Home() {
                     healthyCount: 0,
                     unhealthyCount: 0,
                     offlineCount: 0,
+                    _cpuTotal: 0,
+                    _ramTotal: 0,
+                    _diskTotal: 0,
                 };
             }
 
@@ -124,6 +121,10 @@ function Home() {
                     totalRam += ramInUse;
                     totalDisk += diskInUse;
                     count++;
+
+                    roomMap[roomName]._cpuTotal += cpuInUse;
+                    roomMap[roomName]._ramTotal += ramInUse;
+                    roomMap[roomName]._diskTotal += diskInUse;
                 }
             } catch (err) {
                 console.warn('Lỗi khi tính toán thiết bị:', device.serialNumber);

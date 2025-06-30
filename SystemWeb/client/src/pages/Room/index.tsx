@@ -17,8 +17,7 @@ function Room() {
     const [activeIndex, setActiveIndex] = useState(1);
 
     const { data: mqttData } = useSocket();
-    const { data: initialData, loading } = useFetch<DeviceData[]>('/devices/latest-by-room/' + roomName,
-    );
+    const { data: initialData, loading } = useFetch<DeviceData[]>('/devices/latest-by-room/' + roomName);
 
     const [devices, setDevices] = useState<DeviceData[]>([]);
 
@@ -31,17 +30,15 @@ function Room() {
 
     // Khi nhận dữ liệu realtime từ socket
     useEffect(() => {
-        if (mqttData) {
+        if (mqttData && mqttData.room === roomName) {
             setDevices((prevDevices) => {
                 const index = prevDevices.findIndex((d) => d.serialNumber === mqttData.serialNumber);
 
                 if (index !== -1) {
-                    // Đã tồn tại -> cập nhật thông tin
                     const updated = [...prevDevices];
                     updated[index] = mqttData;
                     return updated;
                 } else {
-                    // Thiết bị mới -> thêm vào danh sách
                     return [...prevDevices, mqttData];
                 }
             });
@@ -163,7 +160,9 @@ function Room() {
                                         >
                                             <span className="flex flex-row justify-between items-center">
                                                 <div>Healthy </div>
-                                                <span className="text-gray-500 bg-gray-200 px-2 rounded-md font-bold">3</span>
+                                                <span className="text-gray-500 bg-gray-200 px-2 rounded-md font-bold">
+                                                    3
+                                                </span>
                                             </span>
                                         </Tab>
                                         <Tab
@@ -176,7 +175,9 @@ function Room() {
                                         >
                                             <span className="flex flex-row gap-5 justify-between items-center">
                                                 <div>Unhealthy </div>
-                                                <span className="text-gray-500 bg-gray-200 px-2 rounded-md font-bold">3</span>
+                                                <span className="text-gray-500 bg-gray-200 px-2 rounded-md font-bold">
+                                                    3
+                                                </span>
                                             </span>
                                         </Tab>
                                     </TabList>

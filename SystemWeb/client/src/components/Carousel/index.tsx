@@ -32,10 +32,10 @@ export default function Carousel({
         <div className="overflow-hidden relative px-10 pb-10 pt-5">
             <div
                 className="flex transition-transform ease-out duration-500"
-                style={{
-                    width: `${(slides.length / visibleSlides) * 100}%`,
-                    transform: `translateX(-${(curr * 100) / slides.length}%)`,
-                }}
+                // style={{
+                //     width: `${(slides.length / visibleSlides) * 100}%`,
+                //     transform: `translateX(-${(curr * 100) / slides.length}%)`,
+                // }}
             >
                 {slides.map((slide, index) => (
                     <div key={index} className="w-1/3 flex-shrink-0 px-5">
