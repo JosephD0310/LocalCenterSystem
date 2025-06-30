@@ -17,10 +17,11 @@ function Login() {
             });
             console.log(res.data);
             localStorage.setItem('token', res.data.access_token);
-            localStorage.setItem('email', res.data.user.email); 
-            navigate("/");
-        } catch (err) {
-            setError('Đăng nhập thất bại');
+            localStorage.setItem('email', res.data.user.email);
+            navigate('/');
+        } catch (err: any) {
+            console.log(err.response.data);
+            setError(err.response.data.message);
         }
     };
 
@@ -65,7 +66,10 @@ function Login() {
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button className="px-5 py-2.5 rounded-[15px] font-bold bg-green-500 cursor-pointer hover:bg-green-600 active:bg-green-700" onClick={handleLogin}>
+                    <button
+                        className="px-5 py-2.5 rounded-[15px] font-bold bg-green-500 cursor-pointer hover:bg-green-600 active:bg-green-700"
+                        onClick={handleLogin}
+                    >
                         Login
                     </button>
                 </form>
@@ -76,4 +80,3 @@ function Login() {
 }
 
 export default Login;
-

@@ -28,7 +28,7 @@ import { User } from './user/user.entity';
                 database: config.get<string>('DB_NAME'),
                 entities: [Device, User],
                 autoLoadEntities: true,
-                synchronize: false
+                synchronize: true
             }),
         }),
         DevicesModule,

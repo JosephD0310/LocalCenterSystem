@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import session from 'express-session';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {

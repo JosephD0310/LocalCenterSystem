@@ -40,8 +40,11 @@ export class AuthService {
 
         const user = await this.validateUser(email, password);
         const authorizationUser = await this.userService.findByEmail(user.email);
-        const role = authorizationUser?.role || 'guest';
-        const payload = { email: user.email, role };
+        if (!authorizationUser) {
+            throw new UnauthorizedException('Tài khoản không được cấp quyền truy cập hệ thống');
+        }
+        const role = authorizationUser.role;
+        const payload = { email: user.email, role: role };
         console.log(payload);
         return {
             access_token: this.jwtService.sign(payload),

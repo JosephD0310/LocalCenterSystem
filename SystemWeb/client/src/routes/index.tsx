@@ -22,10 +22,6 @@ const publicRoutes : IRoute[] = [
 const privateRoutes : IRoute[] = [
     {
         path: config.routes.home, component: Home, layout: DefaultLayout,
-
-    },
-    {
-        path: config.routes.login, component: Login,
     },
     {
         path: config.routes.devices, component: Devices, layout: DefaultLayout,

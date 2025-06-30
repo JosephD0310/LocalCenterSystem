@@ -31,8 +31,8 @@ namespace TerminalService
         private string serialNumber;
         private System.Timers.Timer timer;
         private int pollingInterval;
-        private System.Timers.Timer reconnectTimer;
-        private const int ReconnectInterval = 30000;
+        private int reconnectAttempts = 0;
+        private const int MaxReconnectAttempts = 3;
         private IMqttClient mqttClient;
         public TerminalService()
         {
@@ -42,28 +42,37 @@ namespace TerminalService
 
         public async void OnTimer(object sender, ElapsedEventArgs args)
         {
-            log.Info($"Monitoring the system. Event ID: {eventId++}");
+            log.Info($"[Timer] Checking MQTT connection. Event ID: {eventId++}");
 
-            mqttClient.DisconnectedAsync += async e =>
+            if (mqttClient == null || !mqttClient.IsConnected)
             {
-                log.Warn("MQTT disconnected. Will try to reconnect...");
-                await ConnectMqttAsync();
-            };
-            log.Info(mqttClient.IsConnected);
-            if (mqttClient != null && mqttClient.IsConnected)
-            {
-                log.Info(mqttClient.IsConnected);
-                var systemInfo = GetSystemInfo();
-                var payload = Newtonsoft.Json.JsonConvert.SerializeObject(systemInfo);
-
-                var message = new MqttApplicationMessageBuilder()
-                    .WithTopic(ConfigurationManager.AppSettings["MqttPubTopic"])
-                    .WithPayload(payload)
-                    .Build();
-
-                await mqttClient.PublishAsync(message, CancellationToken.None);
-                log.Info("Published system info to MQTT.");
+                if (reconnectAttempts < MaxReconnectAttempts)
+                {
+                    reconnectAttempts++;
+                    log.Warn($"MQTT not connected. Reconnect attempt {reconnectAttempts}/{MaxReconnectAttempts}...");
+                    await ConnectMqttAsync();
+                }
+                else
+                {
+                    log.Error("Max reconnect attempts reached for this cycle. Skipping publish.");
+                    return;
+                }
             }
+            else
+            {
+                reconnectAttempts = 0; // Reset counter khi kết nối thành công
+            }
+            // Nếu đang kết nối OK thì publish thông tin hệ thống
+            var systemInfo = GetSystemInfo();
+            var payload = JsonConvert.SerializeObject(systemInfo);
+
+            var message = new MqttApplicationMessageBuilder()
+                .WithTopic(ConfigurationManager.AppSettings["MqttPubTopic"])
+                .WithPayload(payload)
+                .Build();
+
+            await mqttClient.PublishAsync(message, CancellationToken.None);
+            log.Info("Published system info to MQTT.");
         }
 
         protected override async void OnStart(string[] args)
@@ -91,25 +100,15 @@ namespace TerminalService
             {
                 var mqttFactory = new MqttFactory();
                 mqttClient = mqttFactory.CreateMqttClient();
-
-                mqttClient.DisconnectedAsync += async e =>
-                {
-                    log.Warn("MQTT disconnected. Attempting to reconnect...");
-
-                    // Dừng timer nếu đang chạy
-                    reconnectTimer?.Stop();
-
-                    await Task.Delay(2000); // đợi chút trước khi reconnect
-                    await ConnectMqttAsync();
-                };
             }
 
+            GetSerialNumber();
             var mqttClientOptions = new MqttClientOptionsBuilder()
                 .WithTcpServer(ConfigurationManager.AppSettings["MqttBroker"],
                                int.Parse(ConfigurationManager.AppSettings["MqttPort"]))
                 .WithCredentials(ConfigurationManager.AppSettings["MqttUsername"],
                                  ConfigurationManager.AppSettings["MqttPassword"])
-                .WithClientId(ConfigurationManager.AppSettings["MqttClientId"])
+                .WithClientId($"terminal-{serialNumber}")
                 .WithCleanSession()
                 .WithTlsOptions(o => o.WithSslProtocols(System.Security.Authentication.SslProtocols.Tls12))
                 .Build();
@@ -120,30 +119,10 @@ namespace TerminalService
                 log.Info("Connected to MQTT broker.");
 
                 await SubscribeToCommands();
-
-                // Dừng timer nếu kết nối thành công
-                reconnectTimer?.Stop();
             }
             catch (Exception ex)
             {
                 log.Error("MQTT Connection Failed: " + ex.Message);
-
-                if (reconnectTimer == null)
-                {
-                    reconnectTimer = new System.Timers.Timer(ReconnectInterval);
-                    reconnectTimer.Elapsed += async (s, e) =>
-                    {
-                        if (!mqttClient.IsConnected)
-                        {
-                            log.Warn("Trying to reconnect to MQTT...");
-                            await ConnectMqttAsync();
-                        }
-                    };
-                    reconnectTimer.AutoReset = true;
-                }
-
-                if (!reconnectTimer.Enabled)
-                    reconnectTimer.Start();
             }
         }
 
@@ -415,7 +394,6 @@ namespace TerminalService
         {
             if (mqttClient == null) return;
 
-            GetSerialNumber();
             string topic = $"control/{serialNumber}";
             await mqttClient.SubscribeAsync(topic);
             log.Info($"Subscribed to topic: {topic}");
@@ -559,11 +537,18 @@ namespace TerminalService
 
         private async Task PublishResultToServer(string serialNumber, string action, string resultData)
         {
-            mqttClient.DisconnectedAsync += async e =>
+            if (mqttClient == null || !mqttClient.IsConnected)
             {
-                log.Warn("MQTT disconnected. Will try to reconnect...");
+                log.Warn("MQTT disconnected when trying to publish command result. Attempting reconnect...");
+
                 await ConnectMqttAsync();
-            };
+
+                if (mqttClient == null || !mqttClient.IsConnected)
+                {
+                    log.Error("Reconnect failed. Cannot send command result.");
+                    return; 
+                }
+            }
 
             var resultObj = new CommandResult
             {

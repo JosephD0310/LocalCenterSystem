@@ -16,9 +16,9 @@ function DeviceCard({ item }: DeviceCardProps) {
         const currentTime = new Date().getTime();
         const lastUpdateDate = new Date(updatedAt).getTime();
         const timeDifference = currentTime - lastUpdateDate; // Tính chênh lệch thời gian (ms)
-        const tenMinutesInMs = 3 * 60 * 1000; // 10 phút tính theo ms
+        const timeLimit = 1.5 * 60 * 1000; 
 
-        if (timeDifference > tenMinutesInMs) {
+        if (timeDifference > timeLimit) {
             return 'offline';
         }
         return 'online';
