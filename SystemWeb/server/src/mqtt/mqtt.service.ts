@@ -35,7 +35,6 @@ export class MqttService implements OnModuleInit {
                 if (topic == 'terminal/data') {
                     const data = JSON.parse(payload.toString());
                     const serial = data.serialNumber;
-                    data.updatedAt = new Date();
 
                     this.eventsGateway.emitMqttData(data);
 
