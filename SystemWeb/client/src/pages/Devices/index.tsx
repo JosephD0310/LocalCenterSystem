@@ -54,6 +54,9 @@ function Devices() {
                     healthyCount: 0,
                     unhealthyCount: 0,
                     offlineCount: 0,
+                    _cpuTotal: 0,
+                    _ramTotal: 0,
+                    _diskTotal: 0,
                 };
             }
 
