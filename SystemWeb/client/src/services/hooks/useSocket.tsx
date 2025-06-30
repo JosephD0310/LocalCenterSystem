@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io(import.meta.env.VITE_API_BASE_DEV); 
+const socket = io(import.meta.env.VITE_API_BASE_URL); 
 
 function useSocket() {
     const [data, setData] = useState<any>(null);
