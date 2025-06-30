@@ -35,11 +35,11 @@ export class MqttService implements OnModuleInit {
                 if (topic == 'terminal/data') {
                     const data = JSON.parse(payload.toString());
                     const serial = data.serialNumber;
+                    const deviceDto: CreateDeviceDto = { ...data };
 
-                    this.eventsGateway.emitMqttData(data);
+                    this.eventsGateway.emitMqttData(deviceDto);
 
-                    const createDeviceDto: CreateDeviceDto = { ...data };
-                    await this.devicesService.create(createDeviceDto);
+                    await this.devicesService.create(deviceDto);
 
                     // Subscribe to response topic dynamically
                     if (!this.watchedSerials.has(serial)) {
