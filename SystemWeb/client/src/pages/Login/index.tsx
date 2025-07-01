@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from '../../utils/axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
     const navigate = useNavigate();
@@ -34,13 +36,23 @@ function Login() {
                         <span className="font-bold text-3xl">SystemCenter</span>
                     </a>
                 </div>
-                <div className="flex flex-row gap-2 text-white">
-                    <img
-                        className="h-8 rounded-md"
-                        src="https://i.pinimg.com/564x/26/79/04/2679047a33c2f3d3a3ed6e676c65450d.jpg"
-                        alt=""
-                    />{' '}
-                    EN
+                <div className="flex flex-row gap-10 text-white">
+                    <span className="flex items-center gap-2">
+                        <img
+                            className="h-8 rounded-md"
+                            src="https://i.pinimg.com/564x/26/79/04/2679047a33c2f3d3a3ed6e676c65450d.jpg"
+                            alt=""
+                        />
+                        EN
+                    </span>
+                    <a
+                        className="flex items-center gap-2 bg-[#00C951] px-3 py-1 rounded-md hover:bg-[#00A63E]"
+                        href="https://github.com/JosephD0310/LocalCenterSystem/releases"
+                        target="_blank"
+                    >
+                        <FontAwesomeIcon icon={faDownload} />
+                        Releases
+                    </a>
                 </div>
             </div>
             <div className="flex flex-col items-center gap-12 text-white">
