@@ -20,11 +20,41 @@ function Room() {
     const { data: initialData, loading } = useFetch<DeviceData[]>('/devices/latest-by-room/' + roomName);
 
     const [devices, setDevices] = useState<DeviceData[]>([]);
+    const [healthyCount, setHealthyCount] = useState(0);
+    const [unhealthyCount, setUnhealthyCount] = useState(0);
+    const [offlineCount, setOfflineCount] = useState(0);
+
+    const updateDeviceStatus = (deviceList: DeviceData[]) => {
+        const currentTime = Date.now();
+        const timeLimit = 1.5 * 60 * 1000;
+
+        let healthy = 0;
+        let unhealthy = 0;
+        let offline = 0;
+
+        deviceList.forEach((device) => {
+            const lastUpdate = new Date(device.updatedAt).getTime();
+            const isOffline = currentTime - lastUpdate > timeLimit;
+
+            if (isOffline) {
+                offline++;
+            } else if (device.status === 'healthy') {
+                healthy++;
+            } else if (device.status === 'unhealthy') {
+                unhealthy++;
+            }
+        });
+
+        setHealthyCount(healthy);
+        setUnhealthyCount(unhealthy);
+        setOfflineCount(offline);
+    };
 
     // Load dữ liệu từ DB ban đầu
     useEffect(() => {
         if (initialData) {
             setDevices(initialData);
+            updateDeviceStatus(initialData);
         }
     }, [initialData]);
 
@@ -33,14 +63,17 @@ function Room() {
         if (mqttData && mqttData.room === roomName) {
             setDevices((prevDevices) => {
                 const index = prevDevices.findIndex((d) => d.serialNumber === mqttData.serialNumber);
+                let updatedDevices;
 
                 if (index !== -1) {
-                    const updated = [...prevDevices];
-                    updated[index] = mqttData;
-                    return updated;
+                    updatedDevices = [...prevDevices];
+                    updatedDevices[index] = mqttData;
                 } else {
-                    return [...prevDevices, mqttData];
+                    updatedDevices = [...prevDevices, mqttData];
                 }
+
+                updateDeviceStatus(updatedDevices);
+                return updatedDevices;
             });
         }
     }, [mqttData]);
@@ -71,25 +104,25 @@ function Room() {
                                         Total Devices: <span className="font-bold">{devices.length}</span>
                                     </p>
                                 </div>
-                                <DoughnutChartv2 total={3} health={1} unhealth={1} />
+                                <DoughnutChartv2 total={devices.length} health={healthyCount} unhealth={unhealthyCount} />
                                 <div className="flex flex-col gap-5 text-2xl text-gray-600 mt-2">
                                     <span className="flex flex-row justify-between items-center">
                                         <div>
                                             <FontAwesomeIcon icon={faCircle} size="2xs" color="#1ED760" /> Healthy{' '}
                                         </div>
-                                        <span className="bg-gray-200 px-2 rounded-md font-bold">3</span>
+                                        <span className="bg-gray-200 px-2 rounded-md font-bold">{healthyCount}</span>
                                     </span>
                                     <span className="flex flex-row gap-5 justify-between items-center">
                                         <div>
                                             <FontAwesomeIcon icon={faCircle} size="2xs" color="#F7CA4C" /> Unhealthy{' '}
                                         </div>
-                                        <span className="bg-gray-200 px-2 rounded-md font-bold">3</span>
+                                        <span className="bg-gray-200 px-2 rounded-md font-bold">{unhealthyCount}</span>
                                     </span>
                                     <span className="flex flex-row justify-between items-center">
                                         <div>
                                             <FontAwesomeIcon icon={faCircle} size="2xs" color="#D4DBE6" /> Offline{' '}
                                         </div>
-                                        <span className="bg-gray-200 px-2 rounded-md font-bold">3</span>
+                                        <span className="bg-gray-200 px-2 rounded-md font-bold">{offlineCount}</span>
                                     </span>
                                 </div>
                             </div>
@@ -161,7 +194,7 @@ function Room() {
                                             <span className="flex flex-row justify-between items-center">
                                                 <div>Healthy </div>
                                                 <span className="text-gray-500 bg-gray-200 px-2 rounded-md font-bold">
-                                                    3
+                                                    {healthyCount}
                                                 </span>
                                             </span>
                                         </Tab>
@@ -176,7 +209,7 @@ function Room() {
                                             <span className="flex flex-row gap-5 justify-between items-center">
                                                 <div>Unhealthy </div>
                                                 <span className="text-gray-500 bg-gray-200 px-2 rounded-md font-bold">
-                                                    3
+                                                    {unhealthyCount}
                                                 </span>
                                             </span>
                                         </Tab>
